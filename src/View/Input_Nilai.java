@@ -8,7 +8,7 @@ package View;
  *
  * @author Ahisar Pranowo
  */
-public class Input_Nilai extends javax.swing.JPanel {
+public class Input_Nilai extends javax.swing.JFrame {
 
     /**
      * Creates new form Input_Nilai

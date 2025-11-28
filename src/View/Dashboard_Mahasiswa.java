@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
-
+import Controller.MahasiswaController;
+import Model.Mahasiswa;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Ahisar Pranowo
@@ -18,6 +20,13 @@ public class Dashboard_Mahasiswa extends javax.swing.JFrame {
     public Dashboard_Mahasiswa() {
         initComponents();
     }
+    
+    private MahasiswaController controller;
+
+    public Dashboard_Mahasiswa(Mahasiswa mahasiswa) {
+    initComponents();
+    controller = new MahasiswaController(this, mahasiswa);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,6 +61,11 @@ public class Dashboard_Mahasiswa extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Button_Dashboard.setText("Dashboard");
+        Button_Dashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_DashboardActionPerformed(evt);
+            }
+        });
         jPanel1.add(Button_Dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 176, 39));
 
         Button_ToDoList.setText("To-Do List");
@@ -65,10 +79,20 @@ public class Dashboard_Mahasiswa extends javax.swing.JFrame {
 
         Button_Profile.setText("Profil");
         Button_Profile.setBorderPainted(false);
+        Button_Profile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_ProfileActionPerformed(evt);
+            }
+        });
         jPanel1.add(Button_Profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 176, 39));
 
         Button_Kst.setText("KST");
         Button_Kst.setBorderPainted(false);
+        Button_Kst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_KstActionPerformed(evt);
+            }
+        });
         jPanel1.add(Button_Kst, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 176, 39));
 
         Button_Jadwal.setText("Jadwal");
@@ -82,14 +106,29 @@ public class Dashboard_Mahasiswa extends javax.swing.JFrame {
 
         Button_Nilai.setText("Transkrip Nilai");
         Button_Nilai.setBorderPainted(false);
+        Button_Nilai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_NilaiActionPerformed(evt);
+            }
+        });
         jPanel1.add(Button_Nilai, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 176, 39));
 
         Button_Tagihan.setText("Tagihan");
         Button_Tagihan.setBorderPainted(false);
+        Button_Tagihan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_TagihanActionPerformed(evt);
+            }
+        });
         jPanel1.add(Button_Tagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 176, 39));
 
         Button_RMK.setText("Registrasi Matakuliah");
         Button_RMK.setBorderPainted(false);
+        Button_RMK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_RMKActionPerformed(evt);
+            }
+        });
         jPanel1.add(Button_RMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 176, 39));
 
         Button_Logout1.setText("Logout");
@@ -125,37 +164,39 @@ public class Dashboard_Mahasiswa extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
-        jLabel1.setText("👋 Selamat Datang, ");
+        jLabel1.setText("👋 Selamat Datang ");
 
         Label_Prodi.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
         Label_Prodi.setText("Program Studi :");
 
         Label_Sks.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        Label_Sks.setText("| [📚 SKS Diambil: ] ");
+        Label_Sks.setText("| [📚 SKS Diambil: ");
 
         Label_Tagihan.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        Label_Tagihan.setText("[💰 Tagihan: Rp:    ] ");
+        Label_Tagihan.setText("[💰 Tagihan: Rp:    ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Label_Prodi)
-                    .addComponent(Label_Sks, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Label_Tagihan, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Label_Sks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Label_Tagihan, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+                            .addComponent(Label_Prodi, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(190, 190, 190)
-                        .addComponent(jLabel1))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,15 +224,48 @@ public class Dashboard_Mahasiswa extends javax.swing.JFrame {
 
     private void Button_ToDoListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_ToDoListActionPerformed
         // TODO add your handling code here:
+       
     }//GEN-LAST:event_Button_ToDoListActionPerformed
 
     private void Button_JadwalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_JadwalActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_Button_JadwalActionPerformed
 
     private void Button_Logout1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_Logout1ActionPerformed
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_Button_Logout1ActionPerformed
+
+    private void Button_RMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_RMKActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_Button_RMKActionPerformed
+
+    private void Button_DashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_DashboardActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Button_DashboardActionPerformed
+
+    private void Button_ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_ProfileActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_Button_ProfileActionPerformed
+
+    private void Button_KstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_KstActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_Button_KstActionPerformed
+
+    private void Button_NilaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_NilaiActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_Button_NilaiActionPerformed
+
+    private void Button_TagihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_TagihanActionPerformed
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_Button_TagihanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,8 +288,6 @@ public class Dashboard_Mahasiswa extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Dashboard_Mahasiswa().setVisible(true));
     }
     
     public void setNamaUser(String nama) {
@@ -234,24 +306,25 @@ public class Dashboard_Mahasiswa extends javax.swing.JFrame {
     public void setTotalTagihan(String totalTagihan) {
         Label_Tagihan.setText("[💰 Tagihan: Rp " + totalTagihan + " ]");
     }
+    
+   
 
-    // --- GETTER UNTUK TOMBOL (Navigasi) ---
     public javax.swing.JButton getButtonLogout() {
-        return Button_Logout1;
+        return Button_Logout1; 
     }
 
     public javax.swing.JButton getButtonJadwal() {
         return Button_Jadwal;
     }
-    
+
     public javax.swing.JButton getButtonKst() {
         return Button_Kst;
     }
-    
+
     public javax.swing.JButton getButtonNilai() {
         return Button_Nilai;
     }
-    
+
     public javax.swing.JButton getButtonTagihan() {
         return Button_Tagihan;
     }
@@ -260,7 +333,18 @@ public class Dashboard_Mahasiswa extends javax.swing.JFrame {
         return Button_ToDoList;
     }
 
-    // Method bantuan untuk menampilkan pesan
+    public javax.swing.JButton getButtonProfile() {
+        return Button_Profile;
+    }
+
+    public javax.swing.JButton getButtonRMK() {
+        return Button_RMK;
+    }
+
+    public javax.swing.JButton getButtonDashboard() {
+        return Button_Dashboard;
+    }
+    
     public void showMessage(String message) {
         javax.swing.JOptionPane.showMessageDialog(this, message);
     }

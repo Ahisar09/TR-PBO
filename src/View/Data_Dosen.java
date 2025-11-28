@@ -8,7 +8,7 @@ package View;
  *
  * @author Ahisar Pranowo
  */
-public class Data_Dosen extends javax.swing.JPanel {
+public class Data_Dosen extends javax.swing.JFrame {
 
     /**
      * Creates new form Data_Dosen

@@ -4,6 +4,9 @@
  */
 package View;
 
+import Controller.KSTController;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Ahisar Pranowo
@@ -26,20 +29,39 @@ public class KST extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        Label_Mahasiswa = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        TextField_NIM = new javax.swing.JTextField();
+        TextField_Nama = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        ScrollPane_KST = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         Table_KST = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        Label_Mahasiswa = new javax.swing.JLabel();
+        Button_HapusMK = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        Button_Kembali = new javax.swing.JButton();
+
+        jLabel2.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
+        jLabel2.setText("NIM :");
+
+        jLabel4.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel4.setText("Matakuliah yang sudah diambil");
+
+        Table_KST.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Kode MK ", "Matakuliah", "SKS", "Hari", "Waktu"
+            }
+        ));
+        jScrollPane1.setViewportView(Table_KST);
+
+        ScrollPane_KST.setViewportView(jScrollPane1);
 
         jPanel2.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -64,40 +86,22 @@ public class KST extends javax.swing.JPanel {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        Button_HapusMK.setText("Hapus MK");
+        Button_HapusMK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_HapusMKActionPerformed(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
         jLabel1.setText("Nama :");
 
-        jLabel2.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
-        jLabel2.setText("NIM :");
-
-        jLabel3.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
-        jLabel3.setText("Semester :");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel4.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel4.setText("Matakuliah yang sudah diambil");
-
-        jScrollPane2.setViewportView(Table_KST);
-
-        Table_KST.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Kode MK ", "Matakuliah", "SKS", "Hari", "Waktu"
+        Button_Kembali.setText("Kembali");
+        Button_Kembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_KembaliActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(Table_KST);
-
-        jScrollPane2.setViewportView(jScrollPane1);
-
-        jButton1.setText("Hapus MK");
-
-        jButton2.setText("Kembali");
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -105,27 +109,25 @@ public class KST extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Button_HapusMK, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ScrollPane_KST, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
+                            .addGap(36, 36, 36)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jComboBox1, 0, 113, Short.MAX_VALUE)
-                                .addComponent(jTextField1)
-                                .addComponent(jTextField2)))
+                                .addComponent(TextField_NIM, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                .addComponent(TextField_Nama)))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(10, 10, 10)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(Button_Kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -135,42 +137,106 @@ public class KST extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextField_Nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(TextField_NIM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ScrollPane_KST, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(Button_HapusMK)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addGap(0, 29, Short.MAX_VALUE))
+                .addComponent(Button_Kembali)
+                .addGap(0, 43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void Button_HapusMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HapusMKActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = Table_KST.getSelectedRow();
+        if (selectedRow == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Pilih matakuliah yang ingin dihapus terlebih dahulu!");
+            return;
+        }
+        
+        // 2. Ambil Kode MK dari baris yang dipilih (Kolom ke-0)
+        String kodeMk = Table_KST.getValueAt(selectedRow, 0).toString();
+        
+        // 3. Panggil Controller untuk menghapus
+        if (controller != null) {
+            controller.hapusMatakuliah(kodeMk);
+        } else {
+            System.out.println("Controller belum terhubung!");
+        }
+    }//GEN-LAST:event_Button_HapusMKActionPerformed
+
+    private void Button_KembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_KembaliActionPerformed
+        // TODO add your handling code here:
+        if (controller != null) {
+            controller.kembali();
+        } else {
+            System.out.println("Controller belum terhubung!");
+        }
+    }//GEN-LAST:event_Button_KembaliActionPerformed
+
+      public void setNamaMahasiswa(String nama) {
+        // Ganti 'TextField_Nama' sesuai nama variabel di desain Anda
+        TextField_Nama.setText(nama);
+    }
+
+    public void setNimMahasiswa(String nim) {
+        // Ganti 'TextField_NIM' sesuai nama variabel di desain Anda
+        TextField_NIM.setText(nim);
+    }
+
+    // 2. Setter untuk Tabel
+    public void setTableKST(DefaultTableModel model) {
+        // Ganti 'Table_KST' sesuai nama variabel tabel Anda
+        Table_KST.setModel(model);
+    }
+    
+    // 3. Getter Tombol
+    public javax.swing.JButton getBtnKembali() {
+        // Ganti 'Button_Kembali' sesuai nama tombol Anda
+        return Button_Kembali;
+    }
+
+    public javax.swing.JButton getBtnHapus() {
+        // Ganti 'Button_Hapus' sesuai nama tombol Anda
+        return Button_HapusMK; 
+    }
+    
+    // --- TAMBAHKAN VARIABEL INI ---
+    private KSTController controller;
+
+    // --- TAMBAHKAN METHOD SETTER INI ---
+   public void setController(KSTController controller) {
+    this.controller = controller;
+    }
+
+    
+    // Pastikan Anda juga punya getter tabel ini (untuk fitur hapus nanti)
+    public javax.swing.JTable getTableKST() {
+        return Table_KST;
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Button_HapusMK;
+    private javax.swing.JButton Button_Kembali;
     private javax.swing.JLabel Label_Mahasiswa;
+    private javax.swing.JScrollPane ScrollPane_KST;
     private javax.swing.JTable Table_KST;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JTextField TextField_NIM;
+    private javax.swing.JTextField TextField_Nama;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

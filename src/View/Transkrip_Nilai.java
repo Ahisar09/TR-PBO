@@ -8,7 +8,7 @@ package View;
  *
  * @author Ahisar Pranowo
  */
-public class Transkrip_Nilai extends javax.swing.JPanel {
+public class Transkrip_Nilai extends javax.swing.JFrame {
 
     /**
      * Creates new form Transkrip_Nilai

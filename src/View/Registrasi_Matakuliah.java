@@ -9,6 +9,13 @@ package View;
  * @author Ahisar Pranowo
  */
 public class Registrasi_Matakuliah extends javax.swing.JPanel {
+    
+     private Controller.RMKController controller;
+
+    public void setController(Controller.RMKController controller) {
+        this.controller = controller;
+    }
+
 
     /**
      * Creates new form Registrasi_Matakuliah
@@ -29,13 +36,13 @@ public class Registrasi_Matakuliah extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         Label_Mahasiswa = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        ComboBox_Semester = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         Table_Registrasi = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Button_Kembali = new javax.swing.JButton();
+        Button_Tambah = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -63,12 +70,15 @@ public class Registrasi_Matakuliah extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Semester :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBox_Semester.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7" }));
+        ComboBox_Semester.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBox_SemesterActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Daftar Matakuliah Tersedia");
-
-        jScrollPane2.setViewportView(Table_Registrasi);
 
         Table_Registrasi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -85,9 +95,19 @@ public class Registrasi_Matakuliah extends javax.swing.JPanel {
 
         jScrollPane2.setViewportView(jScrollPane1);
 
-        jButton1.setText("Kembali");
+        Button_Kembali.setText("Kembali");
+        Button_Kembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_KembaliActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Tambah Matakuliah");
+        Button_Tambah.setText("Tambah Matakuliah");
+        Button_Tambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_TambahActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -95,7 +115,7 @@ public class Registrasi_Matakuliah extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 119, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -104,16 +124,16 @@ public class Registrasi_Matakuliah extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(ComboBox_Semester, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel2)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Button_Tambah, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Button_Kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -123,26 +143,58 @@ public class Registrasi_Matakuliah extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboBox_Semester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(Button_Tambah)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addComponent(Button_Kembali)
                 .addGap(37, 37, 37))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ComboBox_SemesterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox_SemesterActionPerformed
+        // TODO add your handling code here:
+        if (controller != null) {
+            controller.semesterBerubah();
+        }
+    }//GEN-LAST:event_ComboBox_SemesterActionPerformed
 
+    private void Button_KembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_KembaliActionPerformed
+        // TODO add your handling code here:
+        if (controller != null) controller.kembali();
+    }//GEN-LAST:event_Button_KembaliActionPerformed
+
+    private void Button_TambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_TambahActionPerformed
+        // TODO add your handling code here:
+        if (controller != null) controller.tambahMatakuliah();
+    }//GEN-LAST:event_Button_TambahActionPerformed
+
+    
+    // --- 1. SETTER TABEL ---
+    public void setTabelRMK(javax.swing.table.DefaultTableModel model) {
+        // Ganti 'Table_RMK' sesuai nama variabel tabel Anda
+        Table_Registrasi.setModel(model);
+    }
+    
+    // --- 2. GETTER KOMPONEN (PENTING) ---
+    public javax.swing.JTable getTableRMK() {
+        return Table_Registrasi;
+    }
+    
+    public String getSelectedSemester() {
+        // Ganti 'ComboBox_Semester' sesuai nama variabel Anda
+        return ComboBox_Semester.getSelectedItem().toString();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Button_Kembali;
+    private javax.swing.JButton Button_Tambah;
+    private javax.swing.JComboBox<String> ComboBox_Semester;
     private javax.swing.JLabel Label_Mahasiswa;
     private javax.swing.JTable Table_Registrasi;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;

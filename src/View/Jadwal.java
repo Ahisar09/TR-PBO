@@ -4,6 +4,8 @@
  */
 package View;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Ahisar Pranowo
@@ -15,6 +17,7 @@ public class Jadwal extends javax.swing.JPanel {
      */
     public Jadwal() {
         initComponents();
+        
     }
 
     /**
@@ -31,12 +34,8 @@ public class Jadwal extends javax.swing.JPanel {
         Label_Filter = new javax.swing.JLabel();
         ComboBox_Hari = new javax.swing.JComboBox<>();
         Label_Hari = new javax.swing.JLabel();
-        Label_Semester = new javax.swing.JLabel();
-        ComboBox_Semester = new javax.swing.JComboBox<>();
-        Button_Refresh = new javax.swing.JButton();
-        Label_Info = new javax.swing.JLabel();
-        Label_Back = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        Button_Kembali = new javax.swing.JButton();
+        ScrollPane_Jadwal = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         Table_Jadwal = new javax.swing.JTable();
 
@@ -76,28 +75,14 @@ public class Jadwal extends javax.swing.JPanel {
         Label_Hari.setFont(new java.awt.Font("sansserif", 1, 15)); // NOI18N
         Label_Hari.setText("Hari");
 
-        Label_Semester.setFont(new java.awt.Font("sansserif", 1, 15)); // NOI18N
-        Label_Semester.setText("Semester");
-
-        ComboBox_Semester.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8" }));
-        ComboBox_Semester.addActionListener(new java.awt.event.ActionListener() {
+        Button_Kembali.setText("Kembali");
+        Button_Kembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboBox_SemesterActionPerformed(evt);
+                Button_KembaliActionPerformed(evt);
             }
         });
 
-        Button_Refresh.setText("Refresh");
-
-        Label_Info.setText("|   Informasi status :    Tidak bentrok   Warning    Bentrok |");
-
-        Label_Back.setText("Kembali");
-        Label_Back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Label_BackActionPerformed(evt);
-            }
-        });
-
-        jScrollPane2.setViewportView(Table_Jadwal);
+        ScrollPane_Jadwal.setViewportView(Table_Jadwal);
 
         Table_Jadwal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,7 +97,7 @@ public class Jadwal extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(Table_Jadwal);
 
-        jScrollPane2.setViewportView(jScrollPane1);
+        ScrollPane_Jadwal.setViewportView(jScrollPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -121,31 +106,19 @@ public class Jadwal extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Label_Filter)
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Label_Semester, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Label_Hari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(24, 24, 24)
-                        .addComponent(ComboBox_Hari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Button_Refresh)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(ComboBox_Semester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(Label_Filter)
+                .addGap(17, 17, 17)
+                .addComponent(Label_Hari, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(ComboBox_Hari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 806, Short.MAX_VALUE)
-                .addComponent(Label_Back)
+                .addComponent(Button_Kembali)
                 .addGap(28, 28, 28))
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Label_Info)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(ScrollPane_Jadwal, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -156,48 +129,61 @@ public class Jadwal extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Label_Filter)
                     .addComponent(ComboBox_Hari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Label_Hari, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Button_Refresh))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Label_Semester, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboBox_Semester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addComponent(Label_Info, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addComponent(Label_Back)
-                .addGap(0, 34, Short.MAX_VALUE))
+                    .addComponent(Label_Hari, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addComponent(ScrollPane_Jadwal, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(Button_Kembali)
+                .addGap(0, 35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void ComboBox_HariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox_HariActionPerformed
         // TODO add your handling code here:
+        if (controller != null) {
+            controller.filterHari();
+        }
     }//GEN-LAST:event_ComboBox_HariActionPerformed
 
-    private void ComboBox_SemesterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox_SemesterActionPerformed
+    private void Button_KembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_KembaliActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ComboBox_SemesterActionPerformed
+        if (controller != null) {
+            controller.kembali();
+        }
+    }//GEN-LAST:event_Button_KembaliActionPerformed
 
-    private void Label_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Label_BackActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Label_BackActionPerformed
+    // 1. Untuk Mengakses Tabel dari Controller
+   public void setJadwalTable(DefaultTableModel model) {
+    Table_Jadwal.setModel(model);
+}
+    // 2. Untuk Mengakses Tombol Kembali
+    public javax.swing.JButton getBtnKembali() {
+        // Ganti 'jButtonKembali' dengan nama variabel tombol kembali Anda
+        return Button_Kembali; 
+    }
+    
+    private Controller.JadwalController controller;
 
+    public void setController(Controller.JadwalController controller) {
+        this.controller = controller;
+    }
+    
+    // Getter untuk ComboBox (Agar Controller bisa baca isinya)
+    public javax.swing.JComboBox<String> getComboBoxHari() {
+        return ComboBox_Hari; // Sesuaikan dengan nama variabel ComboBox Anda
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Button_Refresh;
+    private javax.swing.JButton Button_Kembali;
     private javax.swing.JComboBox<String> ComboBox_Hari;
-    private javax.swing.JComboBox<String> ComboBox_Semester;
-    private javax.swing.JButton Label_Back;
     private javax.swing.JLabel Label_Filter;
     private javax.swing.JLabel Label_Hari;
-    private javax.swing.JLabel Label_Info;
     private javax.swing.JLabel Label_Jadwal;
-    private javax.swing.JLabel Label_Semester;
+    private javax.swing.JScrollPane ScrollPane_Jadwal;
     private javax.swing.JTable Table_Jadwal;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

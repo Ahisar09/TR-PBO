@@ -24,25 +24,29 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="Label_Prodi" min="-2" max="-2" attributes="0"/>
-                  <Component id="Label_Sks" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" pref="41" max="-2" attributes="0"/>
-                  <Component id="Label_Tagihan" min="-2" pref="135" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="190" pref="190" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel2" min="-2" pref="41" max="-2" attributes="0"/>
+                              <Component id="Label_Sks" alignment="0" max="32767" attributes="0"/>
+                              <Component id="Label_Tagihan" alignment="0" pref="202" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="Label_Prodi" min="-2" pref="369" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="505" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -88,6 +92,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Dashboard"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Button_DashboardActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="0" y="0" width="176" height="39"/>
@@ -113,6 +120,9 @@
             <Property name="text" type="java.lang.String" value="Profil"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Button_ProfileActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="0" y="40" width="176" height="39"/>
@@ -124,6 +134,9 @@
             <Property name="text" type="java.lang.String" value="KST"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Button_KstActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="0" y="120" width="176" height="39"/>
@@ -149,6 +162,9 @@
             <Property name="text" type="java.lang.String" value="Transkrip Nilai"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Button_NilaiActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="0" y="240" width="176" height="39"/>
@@ -160,6 +176,9 @@
             <Property name="text" type="java.lang.String" value="Tagihan"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Button_TagihanActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="0" y="280" width="176" height="39"/>
@@ -171,6 +190,9 @@
             <Property name="text" type="java.lang.String" value="Registrasi Matakuliah"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Button_RMKActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="0" y="80" width="176" height="39"/>
@@ -239,7 +261,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="sansserif" size="15" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="\ud83d\udc4b Selamat Datang, " containsInvalidXMLChars="true"/>
+        <Property name="text" type="java.lang.String" value="\ud83d\udc4b Selamat Datang " containsInvalidXMLChars="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="Label_Prodi">
@@ -255,7 +277,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="sansserif" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="| [\ud83d\udcda SKS Diambil: ] " containsInvalidXMLChars="true"/>
+        <Property name="text" type="java.lang.String" value="| [\ud83d\udcda SKS Diambil: " containsInvalidXMLChars="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="Label_Tagihan">
@@ -263,7 +285,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="sansserif" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="[\ud83d\udcb0 Tagihan: Rp:    ] " containsInvalidXMLChars="true"/>
+        <Property name="text" type="java.lang.String" value="[\ud83d\udcb0 Tagihan: Rp:    " containsInvalidXMLChars="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">

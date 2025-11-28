@@ -4,6 +4,9 @@
  */
 package View;
 
+import Model.Mahasiswa;
+import java.lang.ModuleLayer.Controller;
+
 /**
  *
  * @author Ahisar Pranowo
@@ -18,6 +21,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

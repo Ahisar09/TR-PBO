@@ -9,12 +9,20 @@ package View;
  * @author Ahisar Pranowo
  */
 public class ToDo_List extends javax.swing.JPanel {
+    
+    private Controller.TodoListController controller;
+
+    public void setController(Controller.TodoListController controller) {
+        this.controller = controller;
+    }
 
     /**
      * Creates new form ToDo_List
      */
     public ToDo_List() {
         initComponents();
+        
+        ((javax.swing.JTextField) DateChooser_Deadline.getDateEditor().getUiComponent()).setEditable(false);
     }
 
     /**
@@ -26,29 +34,56 @@ public class ToDo_List extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        Button_Selesai = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         Table_Todo = new javax.swing.JTable();
+        RadioButton_Pending = new javax.swing.JRadioButton();
+        RadioButton_Proses = new javax.swing.JRadioButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        RadioButton_Selesai = new javax.swing.JRadioButton();
+        ComboBox_Prioritas = new javax.swing.JComboBox<>();
+        Button_Kembali = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TextArea_Deskripsi = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        Button_Tambah = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        Button_Update = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        Button_Hapus = new javax.swing.JButton();
+        TextField_Judul = new javax.swing.JTextField();
+        DateChooser_Deadline = new com.toedter.calendar.JDateChooser();
+
+        Button_Selesai.setText("Tandai Selesai");
+
+        Table_Todo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Judul", "Deadline", "Prioritas", "Status"
+            }
+        ));
+        jScrollPane2.setViewportView(Table_Todo);
+
+        jScrollPane3.setViewportView(jScrollPane2);
+
+        RadioButton_Pending.setText("Pending");
+        RadioButton_Pending.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RadioButton_PendingActionPerformed(evt);
+            }
+        });
+
+        RadioButton_Proses.setText("Proses");
 
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -73,8 +108,23 @@ public class ToDo_List extends javax.swing.JPanel {
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
+        RadioButton_Selesai.setText("Selesai");
+
+        ComboBox_Prioritas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tinggi", "Sedang", "Rendah" }));
+
+        Button_Kembali.setText("Kembali");
+        Button_Kembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_KembaliActionPerformed(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
         jLabel2.setText("Judul :");
+
+        TextArea_Deskripsi.setColumns(20);
+        TextArea_Deskripsi.setRows(5);
+        jScrollPane1.setViewportView(TextArea_Deskripsi);
 
         jLabel3.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
         jLabel3.setText("Deskripsi :");
@@ -82,62 +132,38 @@ public class ToDo_List extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
         jLabel4.setText("Prioritas :");
 
+        Button_Tambah.setText("Tambah");
+        Button_Tambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_TambahActionPerformed(evt);
+            }
+        });
+
         jLabel5.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
         jLabel5.setText("Deadline :");
+
+        Button_Update.setText("Update");
+        Button_Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_UpdateActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
         jLabel6.setText("Status :");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Pending");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        Button_Hapus.setText("Hapus");
+        Button_Hapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                Button_HapusActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Proses");
-
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("Selesai");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tinggi", "Sedang", "Rendah" }));
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jButton1.setText("Tambah");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        TextField_Judul.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                TextField_JudulActionPerformed(evt);
             }
         });
-
-        jButton2.setText("Update");
-
-        jButton3.setText("Hapus");
-
-        jButton4.setText("Tandai Selesai");
-
-        jScrollPane3.setViewportView(Table_Todo);
-
-        Table_Todo.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Judul", "Deadline", "Prioritas", "Status"
-            }
-        ));
-        jScrollPane2.setViewportView(Table_Todo);
-
-        jScrollPane3.setViewportView(jScrollPane2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -157,33 +183,42 @@ public class ToDo_List extends javax.swing.JPanel {
                                 .addGap(22, 22, 22))
                             .addComponent(jLabel5)
                             .addComponent(jLabel4))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ComboBox_Prioritas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(5, 5, 5)
+                                        .addComponent(TextField_Judul, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(21, 21, 21)))
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(RadioButton_Pending)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(RadioButton_Proses)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(RadioButton_Selesai))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2))))
-                        .addGap(72, 72, 72)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton3))
+                                .addComponent(DateChooser_Deadline, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(Button_Tambah)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(Button_Update)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
+                        .addComponent(Button_Hapus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4))
+                        .addComponent(Button_Selesai))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Button_Kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,54 +226,135 @@ public class ToDo_List extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton3)
+                    .addComponent(RadioButton_Pending)
+                    .addComponent(RadioButton_Selesai)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TextField_Judul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jRadioButton2)))
+                        .addComponent(RadioButton_Proses)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                    .addComponent(DateChooser_Deadline, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboBox_Prioritas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(Button_Tambah)
+                    .addComponent(Button_Update)
+                    .addComponent(Button_Hapus)
+                    .addComponent(Button_Selesai))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(Button_Kembali)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void RadioButton_PendingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButton_PendingActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_RadioButton_PendingActionPerformed
+
+    private void Button_KembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_KembaliActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if(controller!=null) controller.kembali();
+    }//GEN-LAST:event_Button_KembaliActionPerformed
 
+    private void Button_TambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_TambahActionPerformed
+        // TODO add your handling code here:
+        if(controller!=null) controller.tambah();
+    }//GEN-LAST:event_Button_TambahActionPerformed
 
+    private void Button_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_UpdateActionPerformed
+        // TODO add your handling code here:
+        if (controller != null) {
+            controller.update();
+        }
+    }//GEN-LAST:event_Button_UpdateActionPerformed
+
+    private void Button_HapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HapusActionPerformed
+        // TODO add your handling code here:
+        if(controller!=null) controller.hapus();
+    }//GEN-LAST:event_Button_HapusActionPerformed
+
+    private void TextField_JudulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_JudulActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextField_JudulActionPerformed
+
+    
+    // --- 1. GETTER INPUTAN ---
+    public String getInputJudul() { return TextField_Judul.getText(); }
+    public java.util.Date getInputDeadline() { 
+        return DateChooser_Deadline.getDate(); 
+    }
+    public String getInputDeskripsi() { return TextArea_Deskripsi.getText(); }
+    
+    public String getInputPrioritas() { 
+        return ComboBox_Prioritas.getSelectedItem().toString(); 
+    }
+    
+    public String getInputStatus() {
+        if (RadioButton_Pending.isSelected()) return "pending";
+        if (RadioButton_Proses.isSelected()) return "proses";
+        if (RadioButton_Selesai.isSelected()) return "selesai";
+        return "pending"; 
+    }
+    
+    // --- 2. AKSES TABEL ---
+    public javax.swing.JTable getTableTodo() { return Table_Todo; }
+    
+    public void setTabelTodo(javax.swing.table.DefaultTableModel model) {
+        Table_Todo.setModel(model);
+    }
+    
+    // --- 3. SETTER (Untuk mengisi form saat tabel diklik) ---
+    public void setJudul(String judul) { TextField_Judul.setText(judul); }
+    public void setDeadline(java.util.Date date) { 
+        DateChooser_Deadline.setDate(date); 
+    }  
+    public void setDeskripsi(String ket) { TextArea_Deskripsi.setText(ket); }
+    
+    public void setPrioritas(String prio) { 
+        ComboBox_Prioritas.setSelectedItem(prio); 
+    }
+    
+    public void setStatus(String status) {
+        if (status.equalsIgnoreCase("pending")) RadioButton_Pending.setSelected(true);
+        else if (status.equalsIgnoreCase("proses")) RadioButton_Proses.setSelected(true);
+        else if (status.equalsIgnoreCase("selesai")) RadioButton_Selesai.setSelected(true);
+    }
+    
+    public void resetForm() {
+        TextField_Judul.setText("");
+        DateChooser_Deadline.setDate(null);
+        TextArea_Deskripsi.setText("");
+        ComboBox_Prioritas.setSelectedIndex(0);
+        RadioButton_Pending.setSelected(true);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Button_Hapus;
+    private javax.swing.JButton Button_Kembali;
+    private javax.swing.JButton Button_Selesai;
+    private javax.swing.JButton Button_Tambah;
+    private javax.swing.JButton Button_Update;
+    private javax.swing.JComboBox<String> ComboBox_Prioritas;
+    private com.toedter.calendar.JDateChooser DateChooser_Deadline;
+    private javax.swing.JRadioButton RadioButton_Pending;
+    private javax.swing.JRadioButton RadioButton_Proses;
+    private javax.swing.JRadioButton RadioButton_Selesai;
     private javax.swing.JTable Table_Todo;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JTextArea TextArea_Deskripsi;
+    private javax.swing.JTextField TextField_Judul;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -246,14 +362,8 @@ public class ToDo_List extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

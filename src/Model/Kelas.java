@@ -3,23 +3,27 @@ package Model;
 import java.sql.Time;
 
 public class Kelas {
+
+    // --- ATRIBUT DATABASE ---
     private int idKelas;
     private int idMk;
     private int idDosen;
-    private String hari;       // Senin, Selasa, dll
+    private String hari;
     private Time jamMulai;
     private Time jamSelesai;
     private String ruang;
     private int kuota;
 
-    // --- Helper Attributes (Tidak ada di tabel kelas, tapi berguna untuk Join) ---
-    private String namaMk;     // Untuk menyimpan nama matakuliah
-    private String namaDosen;  // Untuk menyimpan nama dosen
-    private String kodeMk;     // Untuk menyimpan kode mk
+    // --- ATRIBUT TAMBAHAN (HELPER) UNTUK JOIN ---
+    private String kodeMk;
+    private String namaMk;
+    private int sks;
+    private String namaDosen;
 
     public Kelas() {}
 
-    // Getter & Setter Utama
+    // ================= GETTER & SETTER LENGKAP =================
+
     public int getIdKelas() { return idKelas; }
     public void setIdKelas(int idKelas) { this.idKelas = idKelas; }
 
@@ -44,13 +48,16 @@ public class Kelas {
     public int getKuota() { return kuota; }
     public void setKuota(int kuota) { this.kuota = kuota; }
 
-    // Getter & Setter Helper
+    // --- Helper Getters Setters ---
+    public String getKodeMk() { return kodeMk; }
+    public void setKodeMk(String kodeMk) { this.kodeMk = kodeMk; }
+
     public String getNamaMk() { return namaMk; }
     public void setNamaMk(String namaMk) { this.namaMk = namaMk; }
 
+    public int getSks() { return sks; }
+    public void setSks(int sks) { this.sks = sks; }
+
     public String getNamaDosen() { return namaDosen; }
     public void setNamaDosen(String namaDosen) { this.namaDosen = namaDosen; }
-    
-    public String getKodeMk() { return kodeMk; }
-    public void setKodeMk(String kodeMk) { this.kodeMk = kodeMk; }
 }

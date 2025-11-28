@@ -8,7 +8,7 @@ package View;
  *
  * @author Ahisar Pranowo
  */
-public class Form_Tagihan extends javax.swing.JPanel {
+public class Form_Tagihan extends javax.swing.JFrame {
 
     /**
      * Creates new form Form_Tagihan
