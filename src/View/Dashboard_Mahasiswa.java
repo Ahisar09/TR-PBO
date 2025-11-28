@@ -44,10 +44,7 @@ public class Dashboard_Mahasiswa extends javax.swing.JFrame {
         Label_Prodi = new javax.swing.JLabel();
         Label_Sks = new javax.swing.JLabel();
         Label_Tagihan = new javax.swing.JLabel();
-        Label_JadwalHariIni = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,23 +134,7 @@ public class Dashboard_Mahasiswa extends javax.swing.JFrame {
         Label_Sks.setText("| [📚 SKS Diambil: ] ");
 
         Label_Tagihan.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        Label_Tagihan.setText("[💰 Tagihan: Rp: ] ");
-
-        Label_JadwalHariIni.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        Label_JadwalHariIni.setText("📅 Jadwal Hari Ini:    ");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        Label_Tagihan.setText("[💰 Tagihan: Rp:    ] ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,13 +145,9 @@ public class Dashboard_Mahasiswa extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Label_Prodi)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Label_Sks, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Label_Tagihan, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Label_Sks, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Label_JadwalHariIni)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Label_Tagihan, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,15 +171,11 @@ public class Dashboard_Mahasiswa extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Label_Prodi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Label_Sks)
-                    .addComponent(Label_Tagihan))
-                .addGap(29, 29, 29)
-                .addComponent(Label_JadwalHariIni)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(Label_Sks)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(Label_Tagihan)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel2))
         );
 
         pack();
@@ -244,6 +217,54 @@ public class Dashboard_Mahasiswa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Dashboard_Mahasiswa().setVisible(true));
     }
+    
+    public void setNamaUser(String nama) {
+        // Menggabungkan teks default dengan nama mahasiswa
+        jLabel1.setText("👋 Selamat Datang, " + nama);
+    }
+
+    public void setProdiUser(String prodi) {
+        Label_Prodi.setText("Program Studi : " + prodi);
+    }
+
+    public void setTotalSks(String totalSks) {
+        Label_Sks.setText("| [📚 SKS Diambil: " + totalSks + " SKS ]");
+    }
+
+    public void setTotalTagihan(String totalTagihan) {
+        Label_Tagihan.setText("[💰 Tagihan: Rp " + totalTagihan + " ]");
+    }
+
+    // --- GETTER UNTUK TOMBOL (Navigasi) ---
+    public javax.swing.JButton getButtonLogout() {
+        return Button_Logout1;
+    }
+
+    public javax.swing.JButton getButtonJadwal() {
+        return Button_Jadwal;
+    }
+    
+    public javax.swing.JButton getButtonKst() {
+        return Button_Kst;
+    }
+    
+    public javax.swing.JButton getButtonNilai() {
+        return Button_Nilai;
+    }
+    
+    public javax.swing.JButton getButtonTagihan() {
+        return Button_Tagihan;
+    }
+
+    public javax.swing.JButton getButtonTodoList() {
+        return Button_ToDoList;
+    }
+
+    // Method bantuan untuk menampilkan pesan
+    public void showMessage(String message) {
+        javax.swing.JOptionPane.showMessageDialog(this, message);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Button_Dashboard;
@@ -255,7 +276,6 @@ public class Dashboard_Mahasiswa extends javax.swing.JFrame {
     private javax.swing.JButton Button_RMK;
     private javax.swing.JButton Button_Tagihan;
     private javax.swing.JButton Button_ToDoList;
-    private javax.swing.JLabel Label_JadwalHariIni;
     private javax.swing.JLabel Label_Mahasiswa;
     private javax.swing.JLabel Label_Prodi;
     private javax.swing.JLabel Label_Sks;
@@ -264,7 +284,5 @@ public class Dashboard_Mahasiswa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

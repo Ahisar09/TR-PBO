@@ -105,7 +105,7 @@ public class Dashboard_Dosen extends javax.swing.JFrame {
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 22)); // NOI18N
-        jLabel1.setText("👋 Selamat Datang Pak (Dosen)");
+        jLabel1.setText("👋 Selamat Datang ");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
 
         jScrollPane1.setViewportView(jTable1);

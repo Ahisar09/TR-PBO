@@ -34,12 +34,12 @@ public class Login extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        ComboBox_Role = new javax.swing.JComboBox<>();
         Label_Login = new javax.swing.JLabel();
         PasswordField = new javax.swing.JPasswordField();
         Label_Password = new javax.swing.JLabel();
         Label_Username = new javax.swing.JLabel();
         Textfield_Username = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
 
@@ -69,6 +69,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setBackground(new java.awt.Color(0, 204, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -80,17 +81,12 @@ public class Login extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(681, 438, 117, 38));
 
-        ComboBox_Role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mahasiswa", "Dosen", "Admin" }));
-        ComboBox_Role.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboBox_RoleActionPerformed(evt);
-            }
-        });
-
-        Label_Login.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        Label_Login.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         Label_Login.setForeground(new java.awt.Color(255, 255, 255));
         Label_Login.setText("LOGIN SIASAT");
+        jPanel1.add(Label_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, -1, -1));
 
         PasswordField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PasswordField.addActionListener(new java.awt.event.ActionListener() {
@@ -98,14 +94,17 @@ public class Login extends javax.swing.JFrame {
                 PasswordFieldActionPerformed(evt);
             }
         });
+        jPanel1.add(PasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 200, 210, 30));
 
         Label_Password.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Label_Password.setForeground(new java.awt.Color(255, 255, 255));
         Label_Password.setText("Password");
+        jPanel1.add(Label_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 204, -1, -1));
 
         Label_Username.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Label_Username.setForeground(new java.awt.Color(255, 255, 255));
         Label_Username.setText("Username/nim/nip");
+        jPanel1.add(Label_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 124, -1, -1));
 
         Textfield_Username.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Textfield_Username.addActionListener(new java.awt.event.ActionListener() {
@@ -113,54 +112,13 @@ public class Login extends javax.swing.JFrame {
                 Textfield_UsernameActionPerformed(evt);
             }
         });
+        jPanel1.add(Textfield_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 120, 210, 30));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Label_Username)
-                                    .addComponent(Label_Password))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Textfield_Username, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(ComboBox_Role, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(292, 292, 292)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(279, 279, 279)
-                        .addComponent(Label_Login)))
-                .addGap(297, 297, 297))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(Label_Login)
-                .addGap(57, 57, 57)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Label_Username)
-                    .addComponent(Textfield_Username, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Label_Password))
-                .addGap(18, 18, 18)
-                .addComponent(ComboBox_Role, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(94, 94, 94))
-        );
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("*Notes* : gunakan username untuk login sebagai dosen, gunakan nim untuk login sebgai mahasiswa, dan nip untuk dosen");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 520));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -172,10 +130,6 @@ public class Login extends javax.swing.JFrame {
     private void PasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PasswordFieldActionPerformed
-
-    private void ComboBox_RoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox_RoleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ComboBox_RoleActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -205,15 +159,41 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Login().setVisible(true));
     }
+    
+    public String getUsernameInput() {
+            // Mengambil teks dari Textfield_Username
+            return Textfield_Username.getText();
+        }
+
+        public String getPasswordInput() {
+            // Mengambil password dari PasswordField
+            return new String(PasswordField.getPassword());
+        }
+
+        public javax.swing.JButton getBtnLogin() {
+            // Memberikan akses tombol login ke Controller
+            return jButton1;
+        }
+
+        // Opsional: Agar field password juga bisa didengar Action-nya (misal tekan Enter)
+        public javax.swing.JPasswordField getPasswordField() {
+            return PasswordField;
+        }
+
+        // Method untuk menampilkan pesan error/sukses dari Controller
+        public void showMessage(String message) {
+            javax.swing.JOptionPane.showMessageDialog(this, message);
+        }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ComboBox_Role;
     private javax.swing.JLabel Label_Login;
     private javax.swing.JLabel Label_Password;
     private javax.swing.JLabel Label_Username;
     private javax.swing.JPasswordField PasswordField;
     private javax.swing.JTextField Textfield_Username;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
