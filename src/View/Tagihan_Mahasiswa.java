@@ -9,7 +9,13 @@ package View;
  * @author Ahisar Pranowo
  */
 public class Tagihan_Mahasiswa extends javax.swing.JFrame {
+       
+    
+    private Controller.TagihanController controller;
 
+    public void setController(Controller.TagihanController controller) {
+        this.controller = controller;
+    }
     /**
      * Creates new form Tagihan
      */
@@ -41,6 +47,7 @@ public class Tagihan_Mahasiswa extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         Table_Tagihan = new javax.swing.JTable();
+        Button_Kembali = new javax.swing.JButton();
 
         jLabel5.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
         jLabel5.setText("Semester :");
@@ -76,7 +83,7 @@ public class Tagihan_Mahasiswa extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(765, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,25 +122,35 @@ public class Tagihan_Mahasiswa extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(jScrollPane1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        Button_Kembali.setText("Kembali");
+        Button_Kembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_KembaliActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3))
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TextField_NamaNilai, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(TextField_ProdiNilai)
-                                .addComponent(TextField_NimNilai, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(TextField_NamaNilai, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TextField_ProdiNilai)
+                            .addComponent(TextField_NimNilai, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,8 +164,13 @@ public class Tagihan_Mahasiswa extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(TextField_SemesterNilai, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                                    .addComponent(TextField_Status))))))
-                .addContainerGap(799, Short.MAX_VALUE))
+                                    .addComponent(TextField_Status)))))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Button_Kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +198,9 @@ public class Tagihan_Mahasiswa extends javax.swing.JFrame {
                     .addComponent(TextField_Status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(Button_Kembali)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -192,8 +216,31 @@ public class Tagihan_Mahasiswa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextField_SemesterNilaiActionPerformed
 
+    private void Button_KembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_KembaliActionPerformed
+        // TODO add your handling code here:
+        if (controller != null) controller.kembali();
+    }//GEN-LAST:event_Button_KembaliActionPerformed
 
+    // --- SETTER DATA DIRI ---
+    public void setNama(String nama) { TextField_NamaNilai.setText(nama); }
+    public void setNim(String nim) { TextField_NimNilai.setText(nim); }
+    public void setProdi(String prodi) { TextField_ProdiNilai.setText(prodi); }
+    public void setSemester(String smt) { TextField_SemesterNilai.setText(smt); }
+    
+    // --- SETTER STATUS (DENGAN WARNA) ---
+    public void setStatusHeader(String text, java.awt.Color wara) {
+        TextField_Status.setText(text);
+        TextField_Status.setForeground(wara); // Ubah warna font (Merah/Biru)
+        TextField_Status.setFont(new java.awt.Font("Segoe UI", 1, 14)); // Bold
+    }
+
+    // --- SETTER TABEL ---
+    public void setTabelTagihan(javax.swing.table.DefaultTableModel model) {
+        Table_Tagihan.setModel(model);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Button_Kembali;
     private javax.swing.JTable Table_Tagihan;
     private javax.swing.JTextField TextField_NamaNilai;
     private javax.swing.JTextField TextField_NimNilai;

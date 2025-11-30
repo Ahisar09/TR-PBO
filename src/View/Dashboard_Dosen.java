@@ -28,11 +28,12 @@ public class Dashboard_Dosen extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        Button_Logout = new javax.swing.JButton();
+        Button_Presensi = new javax.swing.JButton();
         Button_KelasSaya = new javax.swing.JButton();
         Button_Nilai = new javax.swing.JButton();
         Button_Profile1 = new javax.swing.JButton();
         Button_Dashboard = new javax.swing.JButton();
+        Button_Logout1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         Label_Dosen = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -47,14 +48,14 @@ public class Dashboard_Dosen extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(30, 39, 46));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Button_Logout.setText("Logout");
-        Button_Logout.setBorderPainted(false);
-        Button_Logout.addActionListener(new java.awt.event.ActionListener() {
+        Button_Presensi.setText("Presensi");
+        Button_Presensi.setBorderPainted(false);
+        Button_Presensi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Button_LogoutActionPerformed(evt);
+                Button_PresensiActionPerformed(evt);
             }
         });
-        jPanel1.add(Button_Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 176, 39));
+        jPanel1.add(Button_Presensi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 176, 39));
 
         Button_KelasSaya.setText("Kelas Saya");
         Button_KelasSaya.setBorderPainted(false);
@@ -77,7 +78,16 @@ public class Dashboard_Dosen extends javax.swing.JFrame {
         });
         jPanel1.add(Button_Dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 176, 39));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 57, -1, 510));
+        Button_Logout1.setText("Logout");
+        Button_Logout1.setBorderPainted(false);
+        Button_Logout1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_Logout1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Button_Logout1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 176, 39));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 57, -1, 560));
 
         jPanel2.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -109,22 +119,23 @@ public class Dashboard_Dosen extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
 
         jScrollPane1.setViewportView(jTable1);
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 600, 200));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mata Kuliah", "Id_kelas", "Mahasiswa", "Jadwal"
+                "Mata Kuliah", "Id_kelas", "Hari", "Jam", "Ruangan"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 600, -1));
+        jScrollPane1.setViewportView(jScrollPane2);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 600, 200));
 
         jLabel3.setFont(new java.awt.Font("sansserif", 1, 16)); // NOI18N
         jLabel3.setText("Kelas Yang Di Ajar ");
@@ -134,13 +145,17 @@ public class Dashboard_Dosen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
    
-    private void Button_LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_LogoutActionPerformed
+    private void Button_PresensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_PresensiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Button_LogoutActionPerformed
+    }//GEN-LAST:event_Button_PresensiActionPerformed
 
     private void Button_DashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_DashboardActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Button_DashboardActionPerformed
+
+    private void Button_Logout1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_Logout1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Button_Logout1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,12 +181,32 @@ public class Dashboard_Dosen extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Dashboard_Dosen().setVisible(true));
     }
+    
+   
+
+    // 1. SETTER NAMA (Untuk menampilkan "Selamat Datang, [Nama Dosen]")
+    public void setNamaDosen(String nama) {
+        jLabel1.setText("👋 Selamat Datang, " + nama);
+    }
+
+    // 2. GETTER TOMBOL (Agar bisa diklik lewat Controller)
+    public javax.swing.JButton getButtonPresensi() { return Button_Presensi; }
+    public javax.swing.JButton getButtonKelas() { return Button_KelasSaya; } // Kelas Saya
+    public javax.swing.JButton getButtonNilai() { return Button_Nilai; }
+    public javax.swing.JButton getButtonProfil() { return Button_Profile1; }
+    public javax.swing.JButton getButtonLogout() { return Button_Logout1; }
+
+    // 3. SETTER TABEL (Untuk mengisi daftar kelas)
+    public void setTabelKelas(javax.swing.table.DefaultTableModel model) {
+        jTable1.setModel(model);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Button_Dashboard;
     private javax.swing.JButton Button_KelasSaya;
-    private javax.swing.JButton Button_Logout;
+    private javax.swing.JButton Button_Logout1;
     private javax.swing.JButton Button_Nilai;
+    private javax.swing.JButton Button_Presensi;
     private javax.swing.JButton Button_Profile1;
     private javax.swing.JLabel Label_Dosen;
     private javax.swing.JLabel jLabel1;

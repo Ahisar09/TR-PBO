@@ -81,6 +81,46 @@ public class JadwalController {
         isiTabelJadwal(selectedHari);
     }
     
+    // --- FITUR CEK BENTROK ---
+    private void cekBentrok(List<Kelas> listJadwal) {
+        if (listJadwal == null || listJadwal.isEmpty()) return;
+
+        StringBuilder pesanBentrok = new StringBuilder();
+        boolean adaBentrok = false;
+
+        // Loop bersarang (Nested Loop) untuk membandingkan satu per satu
+        for (int i = 0; i < listJadwal.size(); i++) {
+            for (int j = i + 1; j < listJadwal.size(); j++) {
+                
+                Kelas A = listJadwal.get(i);
+                Kelas B = listJadwal.get(j);
+
+                // 1. Cek Apakah Harinya Sama?
+                if (A.getHari().equalsIgnoreCase(B.getHari())) {
+                    
+                    // 2. Cek Apakah Jamnya Beririsan (Overlap)?
+                    // Rumus: (StartA < EndB) && (StartB < EndA)
+                    if (A.getJamMulai().getTime() < B.getJamSelesai().getTime() &&
+                        B.getJamMulai().getTime() < A.getJamSelesai().getTime()) {
+                        
+                        adaBentrok = true;
+                        pesanBentrok.append("- ")
+                                    .append(A.getNamaMk()).append(" & ").append(B.getNamaMk())
+                                    .append(" (Hari ").append(A.getHari()).append(")\n");
+                    }
+                }
+            }
+        }
+
+        // Jika ditemukan bentrok, tampilkan peringatan
+        if (adaBentrok) {
+            javax.swing.JOptionPane.showMessageDialog(view, 
+                "PERINGATAN: Ditemukan Jadwal Bentrok!\n\n" + pesanBentrok.toString(),
+                "Jadwal Bentrok",
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
     // --- METHOD KEMBALI ---
     public void kembali() {
         // Tutup Frame Pembungkus Panel Jadwal

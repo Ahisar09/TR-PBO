@@ -4,6 +4,8 @@
  */
 package View;
 
+import Model.Kelas;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -172,6 +174,37 @@ public class Jadwal extends javax.swing.JPanel {
     public javax.swing.JComboBox<String> getComboBoxHari() {
         return ComboBox_Hari; // Sesuaikan dengan nama variabel ComboBox Anda
     }
+    
+    public void isiTabelJadwal(String filterHari, List<Kelas> listJadwal) {
+
+    String[] kolom = {"Hari", "Mata Kuliah", "Jam", "Ruang", "Dosen", "SKS"};
+    DefaultTableModel model = new DefaultTableModel(null, kolom);
+
+    if (listJadwal != null) {
+        for (Kelas k : listJadwal) {
+
+            // FILTER HARI
+            if (!filterHari.equalsIgnoreCase("Semua")) {
+                if (!k.getHari().equalsIgnoreCase(filterHari)) {
+                    continue;
+                }
+            }
+
+            Object[] row = {
+                k.getHari(), 
+                k.getNamaMk(),
+                k.getJamMulai() + " - " + k.getJamSelesai(),
+                k.getRuang(),
+                k.getNamaDosen(),
+                k.getSks()
+            };
+            model.addRow(row);
+        }
+    }
+
+    // SET KE TABEL
+    Table_Jadwal.setModel(model);
+}
     
     
 

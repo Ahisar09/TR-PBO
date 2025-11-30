@@ -9,12 +9,15 @@ package View;
  * @author Ahisar Pranowo
  */
 public class Form_Tagihan extends javax.swing.JFrame {
-
+    
+   
     /**
      * Creates new form Form_Tagihan
      */
     public Form_Tagihan() {
         initComponents();
+        this.setSize(900, 700);  
+         this.setLocationRelativeTo(null);
     }
 
     /**
@@ -38,10 +41,14 @@ public class Form_Tagihan extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jComboBox2 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Button_Simpan = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        Button_Edit = new javax.swing.JButton();
+        Button_Reset = new javax.swing.JButton();
+        Button_Kembali = new javax.swing.JButton();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -66,47 +73,130 @@ public class Form_Tagihan extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
         jLabel1.setText("Mahasiswa :");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 74, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 74, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
         jLabel2.setText("Jenis Tagihan :");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 108, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 108, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
         jLabel3.setText("Jumlah :");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 142, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 142, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
         jLabel4.setText("Jatuh Tempo :");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 174, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 174, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
         jLabel5.setText("Status :");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 208, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 208, -1, -1));
 
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 72, 240, -1));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 106, 240, -1));
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 140, 240, -1));
-        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 174, 240, -1));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 72, 240, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 106, 240, -1));
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 140, 240, -1));
+        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 174, 240, -1));
 
-        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 208, 108, -1));
+        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 208, 108, -1));
 
-        jButton1.setText("Simpan");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+        Button_Simpan.setText("Simpan");
+        Button_Simpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_SimpanActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Button_Simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 70, -1));
 
-        jButton2.setText("Batal");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, -1, -1));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Mahasiswa", "Jenis Tagihan", "Jumlah", "Jatuh Tempo", "Status"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 590, 410));
+
+        Button_Edit.setText("Edit");
+        Button_Edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_EditActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Button_Edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+
+        Button_Reset.setText("Reset");
+        Button_Reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_ResetActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Button_Reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, -1, -1));
+
+        Button_Kembali.setText("Kembali");
+        Button_Kembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_KembaliActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Button_Kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 140, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void Button_SimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_SimpanActionPerformed
+        // TODO add your handling code here:
+        if(controller != null) controller.klikSimpan();
+    }//GEN-LAST:event_Button_SimpanActionPerformed
 
+    private void Button_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EditActionPerformed
+        // TODO add your handling code here:
+        if(controller != null) controller.klikEdit();
+    }//GEN-LAST:event_Button_EditActionPerformed
+
+    private void Button_KembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_KembaliActionPerformed
+        // TODO add your handling code here:
+        if(controller != null) controller.klikKembali();
+    }//GEN-LAST:event_Button_KembaliActionPerformed
+
+    private void Button_ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_ResetActionPerformed
+        // TODO add your handling code here:
+        if(controller != null) controller.klikReset();
+    }//GEN-LAST:event_Button_ResetActionPerformed
+
+    
+    private Controller.FormTagihanController controller;
+
+    public void setController(Controller.FormTagihanController controller) {
+        this.controller = controller;
+    }
+
+    // Getter Komponen
+    public javax.swing.JComboBox<String> getComboMahasiswa() { return jComboBox1; }
+    public javax.swing.JTextField getFieldJenis() { return jTextField1; }
+    public javax.swing.JTextField getFieldJumlah() { return jTextField2; }
+    public com.toedter.calendar.JDateChooser getDateChooser() { return jDateChooser1; }
+    public javax.swing.JComboBox<String> getComboStatus() { return jComboBox2; }
+    public javax.swing.JTable getTabelTagihan() { return jTable1; }
+    
+    // Getter Tombol
+    public javax.swing.JButton getBtnSimpan() { return Button_Simpan; }
+    public javax.swing.JButton getBtnEdit() { return Button_Edit; }
+    public javax.swing.JButton getBtnReset() { return Button_Reset; }
+    public javax.swing.JButton getBtnKembali() { return Button_Kembali; }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Button_Edit;
+    private javax.swing.JButton Button_Kembali;
+    private javax.swing.JButton Button_Reset;
+    private javax.swing.JButton Button_Simpan;
     private javax.swing.JLabel Label_Mahasiswa;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -116,6 +206,8 @@ public class Form_Tagihan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables

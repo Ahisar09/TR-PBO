@@ -85,11 +85,11 @@ public class Login extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(681, 438, 117, 38));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 420, 117, 38));
 
         Label_Login.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         Label_Login.setForeground(new java.awt.Color(255, 255, 255));
-        Label_Login.setText("LOGIN SIASAT");
+        Label_Login.setText("LOGIN ");
         jPanel1.add(Label_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, -1, -1));
 
         PasswordField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));

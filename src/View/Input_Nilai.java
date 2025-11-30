@@ -9,12 +9,20 @@ package View;
  * @author Ahisar Pranowo
  */
 public class Input_Nilai extends javax.swing.JFrame {
+    
+    private Controller.InputNilaiController controller;
+
+    public void setController(Controller.InputNilaiController controller) {
+        this.controller = controller;
+    }
 
     /**
      * Creates new form Input_Nilai
      */
     public Input_Nilai() {
         initComponents();
+         this.setSize(1000, 700);  
+    this.setLocationRelativeTo(null);
     }
 
     /**
@@ -34,7 +42,10 @@ public class Input_Nilai extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        Button_Edit = new javax.swing.JButton();
+        Button_Simpan = new javax.swing.JButton();
+        Button_Batal = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(51, 153, 255));
@@ -73,7 +84,7 @@ public class Input_Nilai extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(Label_Mahasiswa1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(617, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,28 +116,76 @@ public class Input_Nilai extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("SImpan");
+        jPanel4.setBackground(new java.awt.Color(30, 39, 46));
+
+        Button_Edit.setText("Edit");
+        Button_Edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_EditActionPerformed(evt);
+            }
+        });
+
+        Button_Simpan.setText("Simpan");
+        Button_Simpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_SimpanActionPerformed(evt);
+            }
+        });
+
+        Button_Batal.setText("Batal");
+        Button_Batal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_BatalActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(231, 231, 231)
+                .addComponent(Button_Edit)
+                .addGap(122, 122, 122)
+                .addComponent(Button_Simpan)
+                .addGap(111, 111, 111)
+                .addComponent(Button_Batal)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Button_Edit)
+                    .addComponent(Button_Simpan)
+                    .addComponent(Button_Batal))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
 
         jButton2.setText("Kembali");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 828, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,30 +195,68 @@ public class Input_Nilai extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(0, 38, Short.MAX_VALUE))
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
+        if(controller != null) controller.loadMahasiswa();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void Button_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EditActionPerformed
+        // TODO add your handling code here:
+        if(controller != null) controller.klikEdit();
+    }//GEN-LAST:event_Button_EditActionPerformed
 
+    private void Button_SimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_SimpanActionPerformed
+        // TODO add your handling code here:
+      if(controller != null) controller.klikSimpan();
+    }//GEN-LAST:event_Button_SimpanActionPerformed
+
+    private void Button_BatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_BatalActionPerformed
+        // TODO add your handling code here:
+       if(controller != null) controller.klikBatal();
+    }//GEN-LAST:event_Button_BatalActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if(controller != null) controller.kembali();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    
+    // --- KOMPONEN ---
+    public javax.swing.JComboBox<String> getComboBoxKelas() { return jComboBox1; }
+    public javax.swing.JTable getTable() { return jTable1; }
+    
+    public void setTabelNilai(javax.swing.table.DefaultTableModel model) {
+        jTable1.setModel(model);
+    }
+    
+    // --- MODE EDIT ---
+    public void setEditMode(boolean mode) {
+        Button_Edit.setEnabled(!mode);
+        Button_Simpan.setEnabled(mode);
+        Button_Batal.setEnabled(mode);
+        jTable1.setEnabled(mode); // Tabel hanya bisa diklik kalau mode edit nyala
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Button_Batal;
+    private javax.swing.JButton Button_Edit;
+    private javax.swing.JButton Button_Simpan;
     private javax.swing.JLabel Label_Mahasiswa;
     private javax.swing.JLabel Label_Mahasiswa1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

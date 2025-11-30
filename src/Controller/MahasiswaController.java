@@ -61,6 +61,25 @@ public class MahasiswaController {
             frameRmk.setVisible(true);
         });
         
+        // --- LOGIKA TOMBOL TAGIHAN (DIPERBAIKI) ---
+        view.getButtonTagihan().addActionListener(e -> {
+             view.dispose(); // Tutup Dashboard
+             
+             // 1. Buat Object View (Karena dia sudah JFrame, langsung dipakai saja)
+             View.Tagihan_Mahasiswa tagihanView = new View.Tagihan_Mahasiswa();
+             
+             // 2. Setting Jendela
+             tagihanView.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+             tagihanView.pack(); // Agar ukuran pas
+             tagihanView.setLocationRelativeTo(null); // Posisi Tengah
+             
+             // 3. Panggil Controller
+             new Controller.TagihanController(tagihanView, mahasiswaLog);
+             
+             // 4. Tampilkan
+             tagihanView.setVisible(true);
+        });
+        
         // --- LOGIKA TOMBOL LOGOUT ---
         view.getButtonLogout().addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(view, "Yakin ingin keluar?", "Logout", JOptionPane.YES_NO_OPTION);
@@ -120,14 +139,22 @@ public class MahasiswaController {
         
         // --- LOGIKA TOMBOL NILAI ---
         view.getButtonNilai().addActionListener(e -> {
-            JOptionPane.showMessageDialog(view, "Menu Nilai akan segera hadir!");
-        });
-        
-        // --- LOGIKA TOMBOL TAGIHAN ---
-        view.getButtonTagihan().addActionListener(e -> {
-             JOptionPane.showMessageDialog(view, "Menu Tagihan akan segera hadir!");
+             // 1. Buat View
+             View.Transkrip_Nilai viewTranskrip = new View.Transkrip_Nilai();
+             
+             // 2. Setting agar tidak menutup seluruh aplikasi saat di-close
+             viewTranskrip.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+             viewTranskrip.setLocationRelativeTo(null);
+             
+             // 3. Panggil Controller
+             new Controller.TranskripController(viewTranskrip, mahasiswaLog);
+             
+             // 4. Tampilkan
+             viewTranskrip.setVisible(true);
         });
     }
+    
+    
 
     private void isiDataDashboard() {
         if (mahasiswaLog != null) {

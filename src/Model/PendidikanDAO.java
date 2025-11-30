@@ -64,7 +64,59 @@ public class PendidikanDAO {
         return m;
     }
     
-    
+   // ==========================================
+    // LOGIN DOSEN (SESUAI TABEL 'dosen')
+    // ==========================================
+    public Model.Dosen loginDosen(String nip, String password) {
+        Model.Dosen d = null;
+        // Query pakai 'nip' dan 'nama_dosen'
+        String sql = "SELECT * FROM dosen WHERE nip = ? AND password = ?";
+        
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, nip);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                d = new Model.Dosen();
+                d.setIdDosen(rs.getInt("id_dosen"));
+                d.setNip(rs.getString("nip"));
+                d.setNama(rs.getString("nama_dosen")); // Ambil dari nama_dosen
+                d.setEmail(rs.getString("email"));
+                d.setNoHp(rs.getString("no_hp"));
+                d.setProdi(rs.getString("prodi"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return d;
+    }
+
+    // ==========================================
+    // LOGIN ADMIN (SESUAI TABEL 'super_admin')
+    // ==========================================
+    public Model.Admin loginAdmin(String username, String password) {
+        Model.Admin a = null;
+        // Query pakai tabel 'super_admin'
+        String sql = "SELECT * FROM super_admin WHERE username = ? AND password = ?";
+        
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                a = new Model.Admin();
+                a.setIdAdmin(rs.getInt("id_admin"));
+                a.setUsername(rs.getString("username"));
+                a.setNama(rs.getString("nama_admin")); // Ambil dari nama_admin
+                a.setEmail(rs.getString("email_admin")); // Ambil dari email_admin
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return a;
+    }
     
     
     // =================================================================
@@ -111,41 +163,71 @@ public class PendidikanDAO {
         return list;
     }
 
-    // 2. Simpan Matakuliah Pilihan ke KST (Insert ke tabel Nilai)
+    // ==========================================
+    // PERBAIKAN: AMBIL MATAKULIAH (Double Insert ke KST & NILAI)
+    // ==========================================
     public boolean ambilMatakuliah(int idMahasiswa, int idKelas, String semesterAktif) {
-        // Logika: Kita insert ke tabel 'nilai' dengan status 'diambil'
-        // Kita gunakan SELECT Subquery untuk otomatis mengisi id_mk dan id_dosen dari tabel kelas
-        String sql = "INSERT INTO nilai (id_mahasiswa, id_kelas, id_mk, id_dosen, semester, status) "
-                   + "SELECT ?, id_kelas, id_mk, id_dosen, ?, 'diambil' "
-                   + "FROM kelas WHERE id_kelas = ?";
         
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, idMahasiswa);
-            ps.setString(2, semesterAktif);
-            ps.setInt(3, idKelas); // Ini kunci utamanya
+        // 1. Cek dulu di tabel KST, apakah sudah ambil?
+        if (cekSudahAmbil(idMahasiswa, idKelas)) {
+            return false; // Sudah ambil, batalkan
+        }
+
+        try {
+            // 2. Insert ke Tabel KST (Tabel Baru untuk Validasi Unik)
+            String sqlKst = "INSERT INTO kst (id_mahasiswa, id_kelas, semester) VALUES (?, ?, ?)";
+            PreparedStatement psKst = conn.prepareStatement(sqlKst);
+            psKst.setInt(1, idMahasiswa);
+            psKst.setInt(2, idKelas);
+            psKst.setString(3, semesterAktif);
+            psKst.executeUpdate();
+
+            // 3. Insert ke Tabel NILAI (Agar Transkrip & Presensi Dosen Tetap Jalan)
+            // Gunakan INSERT IGNORE agar jika ada sisa data lama, tidak error
+            String sqlNilai = "INSERT IGNORE INTO nilai (id_mahasiswa, id_kelas, id_mk, id_dosen, semester, status) "
+                            + "SELECT ?, id_kelas, id_mk, id_dosen, ?, 'diambil' "
+                            + "FROM kelas WHERE id_kelas = ?";
             
-            int affected = ps.executeUpdate();
-            return affected > 0;
+            PreparedStatement psNilai = conn.prepareStatement(sqlNilai);
+            psNilai.setInt(1, idMahasiswa);
+            psNilai.setString(2, semesterAktif);
+            psNilai.setInt(3, idKelas);
+            
+            return psNilai.executeUpdate() > 0;
             
         } catch (SQLException e) {
-            // Jika error (misal duplikat), return false
-            System.out.println("Gagal ambil MK: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Method Bantu Cek Duplikat (Cek ke tabel KST)
+    private boolean cekSudahAmbil(int idMahasiswa, int idKelas) {
+        // Asumsi primary key tabel kst adalah id_kst (sesuaikan jika beda)
+        String sql = "SELECT id_kst FROM kst WHERE id_mahasiswa = ? AND id_kelas = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idMahasiswa);
+            ps.setInt(2, idKelas);
+            ResultSet rs = ps.executeQuery();
+            return rs.next(); // True jika sudah ada
+        } catch (SQLException e) {
             return false;
         }
     }
 
     // ================================
-    // 2. GET KST
+    // 2. GET KST (UPDATE: BACA DARI TABEL KST)
     // ================================
     public List<Nilai> getKST(int idMahasiswa, String semester) {
         List<Nilai> list = new ArrayList<>();
 
-        String sql = "SELECT n.id_nilai, n.id_mahasiswa, n.id_kelas, n.semester, "
-                + "mk.nama_mk, mk.sks "
-                + "FROM nilai n "
-                + "JOIN kelas k ON n.id_kelas = k.id_kelas "
-                + "JOIN matakuliah mk ON k.id_mk = mk.id_mk "
-                + "WHERE n.id_mahasiswa = ? AND n.semester = ?";
+        // Query Join: KST -> KELAS -> MATAKULIAH
+        String sql = "SELECT kst.id_kst, kst.id_mahasiswa, kst.id_kelas, kst.semester, "
+                   + "mk.nama_mk, mk.sks "
+                   + "FROM kst " 
+                   + "JOIN kelas k ON kst.id_kelas = k.id_kelas "
+                   + "JOIN matakuliah mk ON k.id_mk = mk.id_mk "
+                   + "WHERE kst.id_mahasiswa = ? AND kst.semester = ?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, idMahasiswa);
@@ -154,19 +236,43 @@ public class PendidikanDAO {
 
             while (rs.next()) {
                 Nilai n = new Nilai();
-                n.setIdNilai(rs.getInt("id_nilai"));
+                // Kita pinjam model Nilai untuk menampilkan data KST
+                n.setIdNilai(rs.getInt("id_kst")); // Simpan ID KST di sini sementara
                 n.setIdMahasiswa(rs.getInt("id_mahasiswa"));
                 n.setIdKelas(rs.getInt("id_kelas"));
                 n.setSemester(rs.getString("semester"));
                 n.setNamaMk(rs.getString("nama_mk"));
                 n.setSks(rs.getInt("sks"));
+                
                 list.add(n);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return list;
+    }
+    
+    // --- Method Hapus KST (Opsional, jika ada fitur batal ambil MK) ---
+    public boolean hapusKstMatakuliah(int idMahasiswa, int idKelas) {
+        try {
+            // Hapus dari KST
+            String sql1 = "DELETE FROM kst WHERE id_mahasiswa=? AND id_kelas=?";
+            PreparedStatement ps1 = conn.prepareStatement(sql1);
+            ps1.setInt(1, idMahasiswa);
+            ps1.setInt(2, idKelas);
+            ps1.executeUpdate();
+            
+            // Hapus dari Nilai juga (agar bersih)
+            String sql2 = "DELETE FROM nilai WHERE id_mahasiswa=? AND id_kelas=?";
+            PreparedStatement ps2 = conn.prepareStatement(sql2);
+            ps2.setInt(1, idMahasiswa);
+            ps2.setInt(2, idKelas);
+            
+            return ps2.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
     
     // --- TAMBAHKAN INI DI Model/PendidikanDAO.java ---
@@ -309,6 +415,45 @@ public class PendidikanDAO {
             return false;
         }
     }
+    
+    /// ==========================================
+    // 4. AMBIL TRANSKRIP NILAI
+    // ==========================================
+    public java.util.List<Model.Nilai> getTranskrip(int idMahasiswa) {
+        java.util.List<Model.Nilai> list = new java.util.ArrayList<>();
+        
+        // Query: Ambil nilai yang sudah ada hurufnya (sudah dinilai dosen)
+        String sql = "SELECT n.*, mk.kode_mk, mk.nama_mk, mk.sks "
+                   + "FROM nilai n "
+                   + "JOIN matakuliah mk ON n.id_mk = mk.id_mk "
+                   + "WHERE n.id_mahasiswa = ? AND n.nilai_huruf IS NOT NULL "
+                   + "ORDER BY n.semester ASC";
+                   
+        try (java.sql.PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idMahasiswa);
+            java.sql.ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                Model.Nilai n = new Model.Nilai();
+                
+                // Data Nilai
+                n.setIdNilai(rs.getInt("id_nilai"));
+                n.setNilaiAngka(rs.getDouble("nilai_angka")); // NA
+                n.setNilaiHuruf(rs.getString("nilai_huruf")); // NH
+                n.setSemester(rs.getString("semester"));
+                
+                // Data Matakuliah (Helper)
+                n.setKodeMk(rs.getString("kode_mk"));
+                n.setNamaMk(rs.getString("nama_mk"));
+                n.setSks(rs.getInt("sks"));
+                
+                list.add(n);
+            }
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
     // ================================
     // 3. TAGIHAN MAHASISWA
@@ -341,49 +486,46 @@ public class PendidikanDAO {
         return list;
     }
 
-    // ================================
-    // 4. JADWAL KULIAH
-    // ================================
+    // ==========================================
+    // 5. AMBIL JADWAL KULIAH (BERDASARKAN KST)
+    // ==========================================
     public List<Kelas> getJadwalKuliah(int idMahasiswa, String semester) {
-        List<Kelas> listJadwal = new ArrayList<>();
-
-        String sql = "SELECT k.id_kelas, k.hari, k.jam_mulai, k.jam_selesai, k.ruang, "
-                + "mk.id_mk, mk.kode_mk, mk.nama_mk, mk.sks, "
-                + "d.id_dosen, d.nama_dosen "
-                + "FROM nilai n "
-                + "JOIN kelas k ON n.id_kelas = k.id_kelas "
-                + "JOIN matakuliah mk ON k.id_mk = mk.id_mk "
-                + "JOIN dosen d ON k.id_dosen = d.id_dosen "
-                + "WHERE n.id_mahasiswa = ? AND n.semester = ?";
+        List<Kelas> list = new ArrayList<>();
+        
+        // Query: Gabungkan KST -> KELAS -> MK -> DOSEN
+        // Tujuannya: Mengambil data jadwal HANYA untuk matakuliah yang diambil mahasiswa di KST
+        String sql = "SELECT k.hari, k.jam_mulai, k.jam_selesai, k.ruang, "
+                   + "mk.nama_mk, mk.sks, "
+                   + "d.nama_dosen "
+                   + "FROM kst "
+                   + "JOIN kelas k ON kst.id_kelas = k.id_kelas "
+                   + "JOIN matakuliah mk ON k.id_mk = mk.id_mk "
+                   + "JOIN dosen d ON k.id_dosen = d.id_dosen "
+                   + "WHERE kst.id_mahasiswa = ? AND kst.semester = ? "
+                   + "ORDER BY FIELD(k.hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'), k.jam_mulai";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, idMahasiswa);
             ps.setString(2, semester);
-
+            
             ResultSet rs = ps.executeQuery();
-
+            
             while (rs.next()) {
-                Kelas kls = new Kelas();
-                kls.setIdKelas(rs.getInt("id_kelas"));
-                kls.setHari(rs.getString("hari"));
-                kls.setJamMulai(rs.getTime("jam_mulai"));
-                kls.setJamSelesai(rs.getTime("jam_selesai"));
-                kls.setRuang(rs.getString("ruang"));
-
-                kls.setIdMk(rs.getInt("id_mk"));
-                kls.setKodeMk(rs.getString("kode_mk"));
-                kls.setNamaMk(rs.getString("nama_mk"));
-                kls.setSks(rs.getInt("sks"));
-
-                kls.setIdDosen(rs.getInt("id_dosen"));
-                kls.setNamaDosen(rs.getString("nama_dosen"));
-
-                listJadwal.add(kls);
+                Kelas k = new Kelas();
+                k.setHari(rs.getString("hari"));
+                k.setJamMulai(rs.getTime("jam_mulai"));
+                k.setJamSelesai(rs.getTime("jam_selesai"));
+                k.setRuang(rs.getString("ruang"));
+                k.setNamaMk(rs.getString("nama_mk"));
+                k.setSks(rs.getInt("sks"));
+                k.setNamaDosen(rs.getString("nama_dosen"));
+                
+                list.add(k);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return listJadwal;
+        return list;
     }
+    
 }

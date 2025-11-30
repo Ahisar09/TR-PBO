@@ -5,14 +5,19 @@ import java.util.Date;
 public class Tagihan {
     private int idTagihan;
     private int idMahasiswa;
+    private String namaMahasiswa; // <--- TAMBAHAN PENTING UNTUK TABEL
     private String jenisTagihan;
     private double jumlah;
     private Date jatuhTempo;
-    private String statusBayar; // 'belum', 'lunas'
+    private String statusBayar; 
 
     public Tagihan() {}
 
-    // Getter & Setter
+    // Getter & Setter Tambahan
+    public String getNamaMahasiswa() { return namaMahasiswa; }
+    public void setNamaMahasiswa(String namaMahasiswa) { this.namaMahasiswa = namaMahasiswa; }
+
+    // ... (Getter Setter lama Anda TETAP DIPAKAI di bawah ini) ...
     public int getIdTagihan() { return idTagihan; }
     public void setIdTagihan(int idTagihan) { this.idTagihan = idTagihan; }
 

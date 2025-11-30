@@ -11,7 +11,12 @@ package View;
 public class Kelas_Saya extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Kelas_Saya.class.getName());
+    
+    private Controller.KelasSayaController controller;
 
+    public void setController(Controller.KelasSayaController controller) {
+        this.controller = controller;
+    }
     /**
      * Creates new form Kelas_Saya
      */
@@ -70,18 +75,23 @@ public class Kelas_Saya extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Kode MK", "Nama MK", "Hari", "Jam"
+                "Kode MK", "Nama MK", "Hari", "Jam", "Ruang"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Kembali");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,6 +122,11 @@ public class Kelas_Saya extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if(controller != null) controller.kembali();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -135,8 +150,18 @@ public class Kelas_Saya extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Kelas_Saya().setVisible(true));
+    }   
+    
+    // Setter Nama Dosen (Untuk Label di atas)
+    public void setNamaDosen(String nama) {
+        jLabel2.setText("Nama Dosen : " + nama);
     }
-
+    
+    // Setter Tabel
+    public void setTabelKelas(javax.swing.table.DefaultTableModel model) {
+        jTable1.setModel(model);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

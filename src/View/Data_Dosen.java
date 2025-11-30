@@ -9,12 +9,19 @@ package View;
  * @author Ahisar Pranowo
  */
 public class Data_Dosen extends javax.swing.JFrame {
+    
+    private Controller.DataDosenController controller;
 
+    public void setController(Controller.DataDosenController controller) {
+        this.controller = controller;
+    }
     /**
      * Creates new form Data_Dosen
      */
     public Data_Dosen() {
         initComponents();
+        this.setSize(900, 700);  
+         this.setLocationRelativeTo(null);
     }
 
     /**
@@ -31,10 +38,11 @@ public class Data_Dosen extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         Table_DataDosen = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Button_Kembali = new javax.swing.JButton();
+        Button_Hapus = new javax.swing.JButton();
+        Button_Edit = new javax.swing.JButton();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -47,61 +55,96 @@ public class Data_Dosen extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(Label_Mahasiswa, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addComponent(Label_Mahasiswa, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(695, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(Label_Mahasiswa)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 60));
 
         jScrollPane2.setViewportView(Table_DataDosen);
 
         Table_DataDosen.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "NIP", "Nama Dosen", "Email", "No.HP", "Prodi", "Jabatan"
+                "NIP", "Nama Dosen", "Email", "Prodi"
             }
         ));
         jScrollPane1.setViewportView(Table_DataDosen);
 
         jScrollPane2.setViewportView(jScrollPane1);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 72, 697, 333));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 800, 360));
 
-        jButton1.setText("Kembali");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 490, 134, -1));
-
-        jButton2.setText("Hapus");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Button_Kembali.setText("Kembali");
+        Button_Kembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Button_KembaliActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, -1));
+        getContentPane().add(Button_Kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 134, -1));
+
+        Button_Hapus.setText("Hapus");
+        Button_Hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_HapusActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Button_Hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 450, -1, -1));
+
+        Button_Edit.setText("Edit");
+        Button_Edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_EditActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Button_Edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 450, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void Button_HapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HapusActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if (controller != null) controller.klikHapus();
+    }//GEN-LAST:event_Button_HapusActionPerformed
 
+    private void Button_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EditActionPerformed
+        // TODO add your handling code here:
+        if (controller != null) controller.klikEdit();
+    }//GEN-LAST:event_Button_EditActionPerformed
+
+    private void Button_KembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_KembaliActionPerformed
+        // TODO add your handling code here:
+        if (controller != null) controller.klikKembali();
+    }//GEN-LAST:event_Button_KembaliActionPerformed
+    
+    
+    // ... (Getter dan Setter lain TETAP SAMA) ...
+    public javax.swing.JTable getTable() { return Table_DataDosen; }
+    public javax.swing.JButton getButtonKembali() { return Button_Kembali; }
+    public javax.swing.JButton getButtonHapus() { return Button_Hapus; }
+    public javax.swing.JButton getButtonEdit() { return Button_Edit; } 
+
+    public void setTabelDosen(javax.swing.table.DefaultTableModel model) {
+        Table_DataDosen.setModel(model);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Button_Edit;
+    private javax.swing.JButton Button_Hapus;
+    private javax.swing.JButton Button_Kembali;
     private javax.swing.JLabel Label_Mahasiswa;
     private javax.swing.JTable Table_DataDosen;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

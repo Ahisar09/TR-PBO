@@ -136,9 +136,7 @@ public class Dashboard_Admin extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -148,8 +146,7 @@ public class Dashboard_Admin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(151, 151, 151))))
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -188,6 +185,32 @@ public class Dashboard_Admin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Dashboard_Admin().setVisible(true));
     }
+    
+    // =============================================================
+    // KODE TAMBAHAN UNTUK VIEW DASHBOARD ADMIN
+    // =============================================================
+    
+    // --- SETTER DATA DIRI ADMIN ---
+    public void setNamaAdmin(String nama) {
+        jLabel1.setText("👋 Selamat Datang Admin " + nama);
+    }
+    
+    public void setDataDiri(String nama, String email) {
+        // jTextField1 adalah Nama, jTextField2 adalah Email (Sesuaikan urutan)
+        jTextField1.setText(nama);
+        jTextField2.setText(email);
+        
+        // Matikan edit agar hanya read-only
+        jTextField1.setEditable(false);
+        jTextField2.setEditable(false);
+    }
+
+    // --- GETTER TOMBOL (Agar Controller bisa memberi aksi) ---
+    public javax.swing.JButton getButtonMahasiswa() { return Button_Mahasiswa; }
+    public javax.swing.JButton getButtonDosen() { return Button_Dosen; }
+    public javax.swing.JButton getButtonTagihan() { return Button_Jadwal; } // Asumsi Button_Jadwal itu Tagihan
+    public javax.swing.JButton getButtonLogout() { return Button_Logout; }
+    public javax.swing.JButton getButtonDashboard() { return Button_Dashboard; }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Button_Dashboard;
