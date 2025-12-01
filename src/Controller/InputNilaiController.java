@@ -24,10 +24,10 @@ public class InputNilaiController {
         this.dosenLog = dosen;
         this.dao = new DosenDAO();
         
-        view.setController(this); // Sambungkan
+        view.setController(this); 
         
         isiComboBoxKelas();
-        view.setEditMode(false); // Default tabel terkunci
+        view.setEditMode(false); 
     }
     
     public void isiComboBoxKelas() {
@@ -51,17 +51,16 @@ public class InputNilaiController {
         listNilaiTampil = dao.getNilaiMahasiswaKelas(kelasDipilih.getIdKelas());
         
         DefaultTableModel model = new DefaultTableModel(null, new String[]{"NIM", "Nama", "Nilai Angka", "Nilai Huruf"}) {
-            // Agar kolom NIM & Nama tidak bisa diedit, tapi Nilai Angka bisa
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column == 2; // Hanya kolom "Nilai Angka" yang boleh diedit
+                return column == 2; 
             }
         };
         
         for (Nilai n : listNilaiTampil) {
             model.addRow(new Object[]{
-                n.getKodeMk(), // Isinya NIM (dari DAO tadi)
-                n.getNamaMk(), // Isinya Nama
+                n.getKodeMk(), 
+                n.getNamaMk(), 
                 n.getNilaiAngka(),
                 n.getNilaiHuruf()
             });
@@ -69,9 +68,9 @@ public class InputNilaiController {
         view.setTabelNilai(model);
     }
     
-    // --- LOGIKA TOMBOL ---
+    //  LOGIKA TOMBOL
     public void klikEdit() {
-        view.setEditMode(true); // Aktifkan tombol simpan
+        view.setEditMode(true); 
         JOptionPane.showMessageDialog(view, "Silakan input Nilai Angka (0-100) di tabel, lalu tekan Enter.");
     }
     
@@ -103,13 +102,13 @@ public class InputNilaiController {
         if (berhasil > 0) {
             JOptionPane.showMessageDialog(view, "Berhasil menyimpan " + berhasil + " data nilai!");
             view.setEditMode(false);
-            loadMahasiswa(); // Refresh tabel (biar hurufnya muncul)
+            loadMahasiswa(); // Refresh tabel 
         }
     }
     
     public void klikBatal() {
         view.setEditMode(false);
-        loadMahasiswa(); // Reset data asli
+        loadMahasiswa(); 
     }
     
     public void kembali() {
@@ -119,7 +118,7 @@ public class InputNilaiController {
         dash.setVisible(true);
     }
     
-    // Helper Konversi Nilai
+    // Konversi Nilai
     private String hitungHuruf(double angka) {
         if (angka >= 85) return "A";
         if (angka >= 80) return "A-";

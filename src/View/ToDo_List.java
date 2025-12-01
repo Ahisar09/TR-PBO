@@ -295,7 +295,7 @@ public class ToDo_List extends javax.swing.JPanel {
     }//GEN-LAST:event_TextField_JudulActionPerformed
 
     
-    // --- 1. GETTER INPUTAN ---
+    // GETTER INPUTAN 
     public String getInputJudul() { return TextField_Judul.getText(); }
     public java.util.Date getInputDeadline() { 
         return DateChooser_Deadline.getDate(); 
@@ -313,14 +313,14 @@ public class ToDo_List extends javax.swing.JPanel {
         return "pending"; 
     }
     
-    // --- 2. AKSES TABEL ---
+    // AKSES TABEL 
     public javax.swing.JTable getTableTodo() { return Table_Todo; }
     
     public void setTabelTodo(javax.swing.table.DefaultTableModel model) {
         Table_Todo.setModel(model);
     }
     
-    // --- 3. SETTER (Untuk mengisi form saat tabel diklik) ---
+    // - SETTER mengisi form saat tabel diklik
     public void setJudul(String judul) { TextField_Judul.setText(judul); }
     public void setDeadline(java.util.Date date) { 
         DateChooser_Deadline.setDate(date); 

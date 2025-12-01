@@ -3,7 +3,6 @@ package Controller;
 import Model.Dosen;
 import Model.DosenDAO;
 import Model.Kelas;
-// Import Model Presensi (Data)
 import Model.Presensi; 
 
 import java.util.List;
@@ -12,17 +11,12 @@ import javax.swing.table.DefaultTableModel;
 
 public class PresensiController {
 
-    // Gunakan nama lengkap paket View agar tidak tertukar dengan Model
     private View.Presensi view; 
     private Dosen dosenLog;
     private DosenDAO dao;
 
     private List<Kelas> listKelasAjar;
     private List<Presensi> listMahasiswaTampil;
-
-    // --- PENTING: Variabel Pertemuan Ke ---
-    // Karena di DAO membutuhkan pertemuanKe, kita set default = 1
-    // (Nanti bisa dikembangkan agar Dosen bisa memilih pertemuan ke berapa)
     private int pertemuanKe = 1; 
 
     public PresensiController(View.Presensi view, Dosen dosen) {
@@ -49,15 +43,11 @@ public class PresensiController {
         int index = view.getComboBoxMK().getSelectedIndex();
 
         if (index <= 0) {
-            // Kosongkan tabel
             view.setTabel(new DefaultTableModel(null, new String[]{"NIM", "Nama", "H", "I", "S", "A"}));
             return;
         }
 
         Kelas kelasDipilih = listKelasAjar.get(index - 1);
-
-        // --- PERBAIKAN DISINI ---
-        // Sekarang kita kirim parameter 'pertemuanKe' sesuai permintaan DosenDAO
         listMahasiswaTampil = dao.getMahasiswaKelas(kelasDipilih.getIdKelas(), pertemuanKe);
 
         DefaultTableModel model = new DefaultTableModel(null,
@@ -81,7 +71,7 @@ public class PresensiController {
                     default: a = true;
                 }
             } else {
-                 a = true; // Default Alfa jika belum absen
+                 a = true; 
             }
 
             model.addRow(new Object[]{
@@ -118,9 +108,6 @@ public class PresensiController {
             if (h != null && h) status = "Hadir";
             else if (i != null && i) status = "Izin";
             else if (s != null && s) status = "Sakit";
-
-            // --- PERBAIKAN DISINI ---
-            // Kita kirim parameter 'pertemuanKe' sesuai permintaan DosenDAO
             if (dao.simpanPresensi(kelasDipilih.getIdKelas(), idMhs, pertemuanKe, status)) {
                 berhasil++;
             }
@@ -139,15 +126,10 @@ public class PresensiController {
         view.setTabel(new DefaultTableModel(null, new String[]{"NIM", "Nama", "H", "I", "S", "A"}));
     }
     
-  // --- TAMBAHKAN METHOD INI UNTUK TOMBOL KEMBALI ---
+  // METHOD  KEMBALI 
     public void kembali() {
-        // 1. Tutup Jendela Presensi (Cari Frame induknya lalu dispose)
         javax.swing.SwingUtilities.getWindowAncestor(view).dispose();
-        
-        // 2. Buka Dashboard Dosen Kembali
         View.Dashboard_Dosen dash = new View.Dashboard_Dosen();
-        
-        // PENTING: Kita harus bawa data 'dosenLog' agar dashboard tahu siapa yang login
         new Controller.DosenController(dash, dosenLog); 
         
         dash.setVisible(true);

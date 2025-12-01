@@ -64,7 +64,7 @@ public class Profile_Dosen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(709, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,7 +138,7 @@ public class Profile_Dosen extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(97, 97, 97)
                 .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,31 +201,29 @@ public class Profile_Dosen extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new Profile_Dosen().setVisible(true));
     }   
     
-    // --- SETTER (Untuk Menampilkan Data) ---
+    // SETTER Menampilkan Data
     public void setNama(String nama) { jTextField1.setText(nama); }
     public void setNip(String nip) { jTextField3.setText(nip); }
     public void setNoHp(String hp) { jTextField4.setText(hp); }
     public void setEmail(String email) { jTextField5.setText(email); }
 
-    // --- GETTER (Untuk Mengambil Inputan) ---
+    // GETTER Mengambil Inputan
     public String getInputNama() { return jTextField1.getText(); }
     public String getInputNoHp() { return jTextField4.getText(); }
     public String getInputEmail() { return jTextField5.getText(); }
 
-    // --- MODE EDIT (Kunci Form) ---
+    // MODE EDIT 
     public void setEditMode(boolean mode) {
         // Field yang boleh diedit
         jTextField1.setEnabled(mode); // Nama
         jTextField4.setEnabled(mode); // HP
         jTextField5.setEnabled(mode); // Email
-        
-        // Field yang TIDAK boleh diedit (Primary Key)
         jTextField3.setEnabled(false); // NIP
         
         // Tombol
-        jButton1.setEnabled(!mode); // Tombol Edit mati kalau lagi ngedit
-        jButton2.setEnabled(mode);  // Tombol Simpan nyala
-        jButton3.setEnabled(mode);  // Tombol Batal nyala
+        jButton1.setEnabled(!mode); 
+        jButton2.setEnabled(mode);  
+        jButton3.setEnabled(mode);  
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

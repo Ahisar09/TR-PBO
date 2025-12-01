@@ -154,13 +154,10 @@ public class Jadwal extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_Button_KembaliActionPerformed
 
-    // 1. Untuk Mengakses Tabel dari Controller
    public void setJadwalTable(DefaultTableModel model) {
     Table_Jadwal.setModel(model);
 }
-    // 2. Untuk Mengakses Tombol Kembali
     public javax.swing.JButton getBtnKembali() {
-        // Ganti 'jButtonKembali' dengan nama variabel tombol kembali Anda
         return Button_Kembali; 
     }
     
@@ -170,7 +167,7 @@ public class Jadwal extends javax.swing.JPanel {
         this.controller = controller;
     }
     
-    // Getter untuk ComboBox (Agar Controller bisa baca isinya)
+    // Getter untuk ComboBox (
     public javax.swing.JComboBox<String> getComboBoxHari() {
         return ComboBox_Hari; // Sesuaikan dengan nama variabel ComboBox Anda
     }
@@ -202,7 +199,6 @@ public class Jadwal extends javax.swing.JPanel {
         }
     }
 
-    // SET KE TABEL
     Table_Jadwal.setModel(model);
 }
     

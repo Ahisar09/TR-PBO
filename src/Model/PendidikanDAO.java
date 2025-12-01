@@ -1,6 +1,5 @@
 package Model;
 
-// ===== TAMBAHKAN SEMUA IMPORT INI =====
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,6 @@ import Model.Nilai;
 import Model.Tagihan;
 import Model.Kelas;
 import Model.KoneksiDB;
-// ======================================
 
 public class PendidikanDAO {
 
@@ -20,9 +18,7 @@ public class PendidikanDAO {
         this.conn = KoneksiDB.getConnection();
     }
 
-    // ================================
     // 1. LOGIN
-    // ================================
     public Mahasiswa login(String nim, String password) {
         Mahasiswa mhs = null;
         String sql = "SELECT * FROM mahasiswa WHERE nim = ? AND password = ?";
@@ -64,9 +60,7 @@ public class PendidikanDAO {
         return m;
     }
     
-   // ==========================================
-    // LOGIN DOSEN (SESUAI TABEL 'dosen')
-    // ==========================================
+    // LOGIN DOSEN 
     public Model.Dosen loginDosen(String nip, String password) {
         Model.Dosen d = null;
         // Query pakai 'nip' dan 'nama_dosen'
@@ -92,9 +86,7 @@ public class PendidikanDAO {
         return d;
     }
 
-    // ==========================================
-    // LOGIN ADMIN (SESUAI TABEL 'super_admin')
-    // ==========================================
+    // LOGIN ADMIN 
     public Model.Admin loginAdmin(String username, String password) {
         Model.Admin a = null;
         // Query pakai tabel 'super_admin'
@@ -109,8 +101,8 @@ public class PendidikanDAO {
                 a = new Model.Admin();
                 a.setIdAdmin(rs.getInt("id_admin"));
                 a.setUsername(rs.getString("username"));
-                a.setNama(rs.getString("nama_admin")); // Ambil dari nama_admin
-                a.setEmail(rs.getString("email_admin")); // Ambil dari email_admin
+                a.setNama(rs.getString("nama_admin")); 
+                a.setEmail(rs.getString("email_admin")); 
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -119,11 +111,9 @@ public class PendidikanDAO {
     }
     
     
-    // =================================================================
     // FITUR REGISTRASI MATAKULIAH (RMK)
-    // =================================================================
     
-    // 1. Ambil Semua Kelas yang Tersedia (Katalog) berdasarkan Semester Paket
+    // 1. Ambil Semua Kelas yang Tersedia 
     public List<Kelas> getKelasTersedia(String semesterPaket) {
         List<Kelas> list = new ArrayList<>();
         // Query: Ambil kelas yang semester matakuliahnya sesuai pilihan combobox
@@ -163,18 +153,16 @@ public class PendidikanDAO {
         return list;
     }
 
-    // ==========================================
-    // PERBAIKAN: AMBIL MATAKULIAH (Double Insert ke KST & NILAI)
-    // ==========================================
+    //  AMBIL MATAKULIAH 
     public boolean ambilMatakuliah(int idMahasiswa, int idKelas, String semesterAktif) {
         
-        // 1. Cek dulu di tabel KST, apakah sudah ambil?
+        // 1. Cek dulu di tabel KST
         if (cekSudahAmbil(idMahasiswa, idKelas)) {
-            return false; // Sudah ambil, batalkan
+            return false; 
         }
 
         try {
-            // 2. Insert ke Tabel KST (Tabel Baru untuk Validasi Unik)
+            // 2. Insert ke Tabel KST 
             String sqlKst = "INSERT INTO kst (id_mahasiswa, id_kelas, semester) VALUES (?, ?, ?)";
             PreparedStatement psKst = conn.prepareStatement(sqlKst);
             psKst.setInt(1, idMahasiswa);
@@ -182,7 +170,7 @@ public class PendidikanDAO {
             psKst.setString(3, semesterAktif);
             psKst.executeUpdate();
 
-            // 3. Insert ke Tabel NILAI (Agar Transkrip & Presensi Dosen Tetap Jalan)
+            // 3. Insert ke Tabel NILAI (biar Transkrip & Presensi Dosen Tetap Jalan)
             // Gunakan INSERT IGNORE agar jika ada sisa data lama, tidak error
             String sqlNilai = "INSERT IGNORE INTO nilai (id_mahasiswa, id_kelas, id_mk, id_dosen, semester, status) "
                             + "SELECT ?, id_kelas, id_mk, id_dosen, ?, 'diambil' "
@@ -201,23 +189,21 @@ public class PendidikanDAO {
         }
     }
 
-    // Method Bantu Cek Duplikat (Cek ke tabel KST)
+    // Method Bantu Cek Duplikat 
     private boolean cekSudahAmbil(int idMahasiswa, int idKelas) {
-        // Asumsi primary key tabel kst adalah id_kst (sesuaikan jika beda)
         String sql = "SELECT id_kst FROM kst WHERE id_mahasiswa = ? AND id_kelas = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, idMahasiswa);
             ps.setInt(2, idKelas);
             ResultSet rs = ps.executeQuery();
-            return rs.next(); // True jika sudah ada
+            return rs.next(); 
         } catch (SQLException e) {
             return false;
         }
     }
 
-    // ================================
-    // 2. GET KST (UPDATE: BACA DARI TABEL KST)
-    // ================================
+  
+    // 2. GET KST 
     public List<Nilai> getKST(int idMahasiswa, String semester) {
         List<Nilai> list = new ArrayList<>();
 
@@ -237,7 +223,7 @@ public class PendidikanDAO {
             while (rs.next()) {
                 Nilai n = new Nilai();
                 // Kita pinjam model Nilai untuk menampilkan data KST
-                n.setIdNilai(rs.getInt("id_kst")); // Simpan ID KST di sini sementara
+                n.setIdNilai(rs.getInt("id_kst"));
                 n.setIdMahasiswa(rs.getInt("id_mahasiswa"));
                 n.setIdKelas(rs.getInt("id_kelas"));
                 n.setSemester(rs.getString("semester"));
@@ -252,7 +238,7 @@ public class PendidikanDAO {
         return list;
     }
     
-    // --- Method Hapus KST (Opsional, jika ada fitur batal ambil MK) ---
+    // Method Hapus KST 
     public boolean hapusKstMatakuliah(int idMahasiswa, int idKelas) {
         try {
             // Hapus dari KST
@@ -262,7 +248,7 @@ public class PendidikanDAO {
             ps1.setInt(2, idKelas);
             ps1.executeUpdate();
             
-            // Hapus dari Nilai juga (agar bersih)
+            // Hapus dari Nilai juga
             String sql2 = "DELETE FROM nilai WHERE id_mahasiswa=? AND id_kelas=?";
             PreparedStatement ps2 = conn.prepareStatement(sql2);
             ps2.setInt(1, idMahasiswa);
@@ -275,7 +261,6 @@ public class PendidikanDAO {
         }
     }
     
-    // --- TAMBAHKAN INI DI Model/PendidikanDAO.java ---
     public boolean hapusKstMatakuliah(int idMahasiswa, String kodeMk) {
         // Kita hapus dari tabel 'nilai' berdasarkan id_mahasiswa dan kode_mk
         String sql = "DELETE FROM nilai WHERE id_mahasiswa = ? AND id_mk = (SELECT id_mk FROM matakuliah WHERE kode_mk = ? LIMIT 1)";
@@ -293,9 +278,8 @@ public class PendidikanDAO {
     }
     
     
-    // =================================================================
-    // UPDATE PROFIL LENGKAP (Termasuk JK & Tanggal Lahir)
-    // =================================================================
+   
+    // UPDATE PROFIL 
     public boolean updateProfilMahasiswa(Mahasiswa mhs) {
         String sql = "UPDATE mahasiswa SET email = ?, no_hp = ?, alamat = ?, "
                    + "tempat_lahir = ?, jk = ?, tanggal_lahir = ?, "
@@ -336,10 +320,8 @@ public class PendidikanDAO {
     }
     
     
-    // =================================================================
     // FITUR TO-DO LIST
-    // =================================================================
-    
+   
     // 1. Ambil Semua Todo List Mahasiswa
     public List<Model.TodoList> getTodoList(int idMahasiswa) {
         List<Model.TodoList> list = new ArrayList<>();
@@ -400,7 +382,7 @@ public class PendidikanDAO {
         } catch (Exception e) { e.printStackTrace(); return false; }
     }
     
-    // Method khusus untuk mengubah status saja (Lebih cepat daripada update semua)
+    // Method ubah status
     public boolean updateStatusTodo(int idTodo, String statusBaru) {
         String sql = "UPDATE todo_list SET status = ? WHERE id_todo = ?";
         
@@ -416,9 +398,7 @@ public class PendidikanDAO {
         }
     }
     
-    /// ==========================================
-    // 4. AMBIL TRANSKRIP NILAI
-    // ==========================================
+    //  AMBIL TRANSKRIP NILAI
     public java.util.List<Model.Nilai> getTranskrip(int idMahasiswa) {
         java.util.List<Model.Nilai> list = new java.util.ArrayList<>();
         
@@ -455,9 +435,8 @@ public class PendidikanDAO {
         return list;
     }
 
-    // ================================
-    // 3. TAGIHAN MAHASISWA
-    // ================================
+    // TAGIHAN MAHASISWA
+    
     public List<Tagihan> getTagihan(int idMahasiswa) {
         List<Tagihan> list = new ArrayList<>();
 
@@ -486,14 +465,13 @@ public class PendidikanDAO {
         return list;
     }
 
-    // ==========================================
-    // 5. AMBIL JADWAL KULIAH (BERDASARKAN KST)
-    // ==========================================
+    // AMBIL JADWAL KULIAH (BERDASARKAN KST)
+ 
     public List<Kelas> getJadwalKuliah(int idMahasiswa, String semester) {
         List<Kelas> list = new ArrayList<>();
         
         // Query: Gabungkan KST -> KELAS -> MK -> DOSEN
-        // Tujuannya: Mengambil data jadwal HANYA untuk matakuliah yang diambil mahasiswa di KST
+        // Mengambil data jadwal untuk matakuliah yang diambil mahasiswa di KST
         String sql = "SELECT k.hari, k.jam_mulai, k.jam_selesai, k.ruang, "
                    + "mk.nama_mk, mk.sks, "
                    + "d.nama_dosen "

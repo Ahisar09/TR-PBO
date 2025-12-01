@@ -21,14 +21,11 @@ public class JadwalController {
         this.mahasiswaLog = mhs;
         this.dao = new PendidikanDAO();
         
-        // PENTING: Sambungkan Controller ke View
         view.setController(this);
-        
-        // Tampilkan semua jadwal saat pertama kali dibuka
         isiTabelJadwal("Semua"); 
     }
     
-    // Method untuk mengisi tabel dengan Filter Hari
+    // Method isi tabel dengan Filter Hari
     public void isiTabelJadwal(String filterHari) {
         // 1. Siapkan Kolom
         String[] kolom = {"Hari", "Mata Kuliah", "Jam", "Ruang", "Dosen", "SKS"};
@@ -41,10 +38,9 @@ public class JadwalController {
         // 3. Filter Data di sini (Looping)
         if (listJadwal != null) {
             for (Kelas k : listJadwal) {
-                // LOGIKA FILTER:
+                // LOGIKA FILTER
                 // Jika filter = "Semua", masukkan semua data.
-                // Jika filter = Hari tertentu (misal "Senin"), hanya masukkan yang harinya sama.
-                
+                // Jika filter = Hari tertentu (misal Senin)
                 boolean isMatch = false;
                 
                 if (filterHari.equalsIgnoreCase("Semua") || filterHari.contains("Semua")) {
@@ -52,8 +48,6 @@ public class JadwalController {
                 } else if (k.getHari() != null && k.getHari().equalsIgnoreCase(filterHari)) {
                     isMatch = true;
                 }
-                
-                // Jika cocok, masukkan ke tabel
                 if (isMatch) {
                     Object[] row = new Object[] {
                         k.getHari(),
@@ -68,34 +62,34 @@ public class JadwalController {
             }
         }
         
-        // 4. Update View
+        // Update View
         view.setJadwalTable(model);
     }
     
-    // --- METHOD YANG DIPANGGIL SAAT COMBOBOX DIGANTI ---
+    // METHOD COMBOBOX DIGANTI 
     public void filterHari() {
-        // Ambil teks yang dipilih user di ComboBox (misal: "Senin")
+        // Ambil teks yang dipilih user di ComboBox (misal Senin)
         String selectedHari = view.getComboBoxHari().getSelectedItem().toString();
         
         // Isi ulang tabel dengan filter tersebut
         isiTabelJadwal(selectedHari);
     }
     
-    // --- FITUR CEK BENTROK ---
+    //  CEK BENTROK 
     private void cekBentrok(List<Kelas> listJadwal) {
         if (listJadwal == null || listJadwal.isEmpty()) return;
 
         StringBuilder pesanBentrok = new StringBuilder();
         boolean adaBentrok = false;
 
-        // Loop bersarang (Nested Loop) untuk membandingkan satu per satu
+        // Loop bersarang (Nested Loop) 
         for (int i = 0; i < listJadwal.size(); i++) {
             for (int j = i + 1; j < listJadwal.size(); j++) {
                 
                 Kelas A = listJadwal.get(i);
                 Kelas B = listJadwal.get(j);
 
-                // 1. Cek Apakah Harinya Sama?
+                // 1. Cek 
                 if (A.getHari().equalsIgnoreCase(B.getHari())) {
                     
                     // 2. Cek Apakah Jamnya Beririsan (Overlap)?
@@ -112,7 +106,7 @@ public class JadwalController {
             }
         }
 
-        // Jika ditemukan bentrok, tampilkan peringatan
+        // tampilkan peringatan
         if (adaBentrok) {
             javax.swing.JOptionPane.showMessageDialog(view, 
                 "PERINGATAN: Ditemukan Jadwal Bentrok!\n\n" + pesanBentrok.toString(),
@@ -121,15 +115,13 @@ public class JadwalController {
         }
     }
     
-    // --- METHOD KEMBALI ---
+    // METHOD KEMBALI 
     public void kembali() {
-        // Tutup Frame Pembungkus Panel Jadwal
         java.awt.Window parent = javax.swing.SwingUtilities.getWindowAncestor(view);
         if (parent != null) {
             parent.dispose();
         }
         
-        // Buka Dashboard
         Dashboard_Mahasiswa dashboard = new Dashboard_Mahasiswa();
         new MahasiswaController(dashboard, mahasiswaLog);
         dashboard.setVisible(true);

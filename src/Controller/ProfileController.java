@@ -56,7 +56,7 @@ public class ProfileController {
         view.setAtasNama(mhs.getNamaRekening());
     }
 
-    // --- LOGIKA TOMBOL ---
+    // LOGIKA TOMBOL 
 
     public void klikEdit() {
         view.setEditMode(true);
@@ -65,7 +65,7 @@ public class ProfileController {
     
     public void klikBatal() {
         view.setEditMode(false);
-        isiFormulir(); // Reset data ke awal
+        isiFormulir(); 
     }
     
     public void klikSimpan() {

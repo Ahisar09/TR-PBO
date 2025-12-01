@@ -16,7 +16,7 @@ public class TodoListController {
     private Mahasiswa mhs;
     private PendidikanDAO dao;
     
-    // List bantu untuk menyimpan ID Todo yang sedang tampil di tabel
+    //  menyimpan ID Todo yang sedang tampil di tabel
     private List<TodoList> listTodoSedangTampil;
 
     public TodoListController(ToDo_List view, Mahasiswa mhs) {
@@ -24,11 +24,11 @@ public class TodoListController {
         this.mhs = mhs;
         this.dao = new PendidikanDAO();
         
-        view.setController(this); // Sambungkan
+        view.setController(this); 
         refreshTabel();
     }
     
-    // --- 1. REFRESH TABEL (TAMPILKAN DATA) ---
+    //
     public void refreshTabel() {
         listTodoSedangTampil = dao.getTodoList(mhs.getIdMahasiswa());
         
@@ -51,7 +51,7 @@ public class TodoListController {
         view.setTabelTodo(model);
     }
     
-    // --- 2. KLIK TABEL (POPULATE FORM) ---
+    // KLIK TABEL 
     public void klikTabel() {
         int row = view.getTableTodo().getSelectedRow();
         if (row != -1) {
@@ -64,13 +64,13 @@ public class TodoListController {
             view.setPrioritas(t.getPrioritas());
             view.setStatus(t.getStatus());
             
-            // --- BAGIAN DATE CHOOSER ---
+            // DATE CHOOSER
             // Langsung set objek Date ke JDateChooser (Tidak perlu parsing string)
             view.setDeadline(t.getDeadline()); 
         }
     }
     
-    // --- 3. LOGIKA TOMBOL TAMBAH ---
+    //  LOGIKA TOMBOL TAMBAH 
     public void tambah() {
         // Validasi: Pastikan tanggal dipilih
         if (view.getInputDeadline() == null) {
@@ -86,14 +86,14 @@ public class TodoListController {
             t.setPrioritas(view.getInputPrioritas());
             t.setStatus(view.getInputStatus()); 
             
-            // --- INPUT DATE CHOOSER ---
+            // INPUT DATE CHOOSER
             // Langsung ambil Date dari View
             t.setDeadline(view.getInputDeadline()); 
             
             if (dao.tambahTodo(t)) {
                 JOptionPane.showMessageDialog(view, "Berhasil Menambah Tugas!");
                 refreshTabel();
-                view.resetForm(); // Kosongkan form setelah simpan
+                view.resetForm(); 
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,7 +101,7 @@ public class TodoListController {
         }
     }
     
-    // --- 4. LOGIKA TOMBOL UPDATE ---
+    // LOGIKA TOMBOL UPDATE 
     public void update() {
         int row = view.getTableTodo().getSelectedRow();
         if (row == -1) {
@@ -120,13 +120,13 @@ public class TodoListController {
             
             // Buat Objek Baru dengan ID yang sama
             TodoList tBaru = new TodoList();
-            tBaru.setIdTodo(tLama.getIdTodo()); // ID Tetap
+            tBaru.setIdTodo(tLama.getIdTodo());
             tBaru.setJudul(view.getInputJudul());
             tBaru.setDeskripsi(view.getInputDeskripsi());
             tBaru.setPrioritas(view.getInputPrioritas());
             tBaru.setStatus(view.getInputStatus());
             
-            // --- INPUT DATE CHOOSER ---
+            // INPUT DATE CHOOSER 
             tBaru.setDeadline(view.getInputDeadline());
             
             if (dao.updateTodo(tBaru)) {
@@ -140,7 +140,7 @@ public class TodoListController {
         }
     }
 
-    // --- 5. LOGIKA TOMBOL HAPUS ---
+    //  LOGIKA TOMBOL HAPUS 
     public void hapus() {
         int row = view.getTableTodo().getSelectedRow();
         if (row == -1) {
@@ -159,7 +159,7 @@ public class TodoListController {
         }
     }
     
-    // --- 6. LOGIKA TOMBOL TANDAI SELESAI ---
+    //  LOGIKA TOMBOL TANDAI SELESAI 
     public void tandaiSelesai() {
         int row = view.getTableTodo().getSelectedRow();
         if (row == -1) {
@@ -169,7 +169,7 @@ public class TodoListController {
         
         TodoList t = listTodoSedangTampil.get(row);
         
-        // Update Status jadi "selesai"
+        // Update Status jadi selesai
         boolean sukses = dao.updateStatusTodo(t.getIdTodo(), "selesai");
         
         if (sukses) {
@@ -181,7 +181,7 @@ public class TodoListController {
         }
     }
     
-    // --- 7. LOGIKA KEMBALI ---
+    //  LOGIKA KEMBALI
     public void kembali() {
         javax.swing.SwingUtilities.getWindowAncestor(view).dispose();
         Dashboard_Mahasiswa dashboard = new Dashboard_Mahasiswa();

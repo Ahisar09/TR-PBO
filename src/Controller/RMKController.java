@@ -15,8 +15,7 @@ public class RMKController {
     private Mahasiswa mhs;
     private PendidikanDAO dao;
     
-    // List untuk menyimpan data kelas yang sedang tampil di tabel
-    // Ini PENTING agar kita tahu ID Kelas saat baris diklik
+    // menyimpan data kelas yang sedang tampil di tabel
     private List<Kelas> daftarKelasSedangTampil;
 
     public RMKController(Registrasi_Matakuliah view, Mahasiswa mhs) {
@@ -24,13 +23,12 @@ public class RMKController {
         this.mhs = mhs;
         this.dao = new PendidikanDAO();
         
-        view.setController(this); // Sambungkan
+        view.setController(this); 
         
-        // Isi tabel default (Semester 1)
         isiTabelKatalog("1"); 
     }
     
-    // --- 1. ISI TABEL ---
+    // ISI TABEL
     public void isiTabelKatalog(String semesterPaket) {
         // Ambil data dari DAO
         daftarKelasSedangTampil = dao.getKelasTersedia(semesterPaket);
@@ -54,15 +52,14 @@ public class RMKController {
         view.setTabelRMK(model);
     }
     
-    // --- 2. LOGIKA PILIH SEMESTER ---
+    // LOGIKA PILIH SEMESTER
     public void semesterBerubah() {
-        // Ambil semester yang dipilih dari ComboBox view
+  
         String smt = view.getSelectedSemester();
-        // Refresh tabel sesuai semester
         isiTabelKatalog(smt);
     }
 
-    // --- 3. LOGIKA TAMBAH MATAKULIAH ---
+    //  LOGIKA TAMBAH MATAKULIAH 
     public void tambahMatakuliah() {
         // 1. Cek Baris mana yang dipilih
         int row = view.getTableRMK().getSelectedRow();
@@ -75,7 +72,7 @@ public class RMKController {
         Kelas kelasDipilih = daftarKelasSedangTampil.get(row);
         
         // 3. Simpan ke Database
-        String semesterAktif = "20231"; // Semester Mahasiswa Saat Ini (Bisa dinamis)
+        String semesterAktif = "1"; 
         boolean sukses = dao.ambilMatakuliah(mhs.getIdMahasiswa(), kelasDipilih.getIdKelas(), semesterAktif);
         
         if (sukses) {
@@ -85,7 +82,7 @@ public class RMKController {
         }
     }
 
-    // --- 4. KEMBALI ---
+    // KEMBALI
     public void kembali() {
         javax.swing.SwingUtilities.getWindowAncestor(view).dispose();
         Dashboard_Mahasiswa dashboard = new Dashboard_Mahasiswa();

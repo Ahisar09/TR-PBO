@@ -184,19 +184,19 @@ public class Dashboard_Dosen extends javax.swing.JFrame {
     
    
 
-    // 1. SETTER NAMA (Untuk menampilkan "Selamat Datang, [Nama Dosen]")
+    // SETTER NAMA
     public void setNamaDosen(String nama) {
         jLabel1.setText("👋 Selamat Datang, " + nama);
     }
 
-    // 2. GETTER TOMBOL (Agar bisa diklik lewat Controller)
+    // GETTER TOMBOL
     public javax.swing.JButton getButtonPresensi() { return Button_Presensi; }
     public javax.swing.JButton getButtonKelas() { return Button_KelasSaya; } // Kelas Saya
     public javax.swing.JButton getButtonNilai() { return Button_Nilai; }
     public javax.swing.JButton getButtonProfil() { return Button_Profile1; }
     public javax.swing.JButton getButtonLogout() { return Button_Logout1; }
 
-    // 3. SETTER TABEL (Untuk mengisi daftar kelas)
+    // SETTER TABEL 
     public void setTabelKelas(javax.swing.table.DefaultTableModel model) {
         jTable1.setModel(model);
     }

@@ -165,26 +165,22 @@ public class Login extends javax.swing.JFrame {
     }
     
     public String getUsernameInput() {
-            // Mengambil teks dari Textfield_Username
             return Textfield_Username.getText();
         }
 
         public String getPasswordInput() {
-            // Mengambil password dari PasswordField
             return new String(PasswordField.getPassword());
         }
 
         public javax.swing.JButton getBtnLogin() {
-            // Memberikan akses tombol login ke Controller
             return jButton1;
         }
 
-        // Opsional: Agar field password juga bisa didengar Action-nya (misal tekan Enter)
         public javax.swing.JPasswordField getPasswordField() {
             return PasswordField;
         }
 
-        // Method untuk menampilkan pesan error/sukses dari Controller
+        // pesan error/sukses dari Controller
         public void showMessage(String message) {
             javax.swing.JOptionPane.showMessageDialog(this, message);
         }

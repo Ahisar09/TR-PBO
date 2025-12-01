@@ -5,7 +5,7 @@ public class Matakuliah {
     private String kodeMk;
     private String namaMk;
     private int sks;
-    private int semester; // Semester paket (misal: mk ini untuk smt 1)
+    private int semester; 
     private String prodi;
 
     public Matakuliah() {}

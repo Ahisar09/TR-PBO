@@ -38,38 +38,37 @@ public class TranskripController {
         // 1. Ambil Data Transkrip dari Database
         List<Nilai> listNilai = dao.getTranskrip(mhs.getIdMahasiswa());
         
-        // 2. Siapkan Wadah Perhitungan (RekapNilai)
+        // 2. Wadah Perhitungan (RekapNilai)
         RekapNilai rekap = new RekapNilai();
         rekap.setIdMahasiswa(mhs.getIdMahasiswa());
         rekap.setTotalSks(0);
         
         double totalBobotKaliSks = 0; // Variabel bantu hitung IPK
         
-        // 3. Siapkan Header Tabel (Ada 6 Kolom)
+        // 3. Header Tabel
         String[] kolom = {"Kode MK", "Nama Matakuliah", "SKS", "NA", "NH", "Semester"};
         DefaultTableModel model = new DefaultTableModel(null, kolom);
         
         // 4. Looping Data
         for (Nilai n : listNilai) {
             
-            // --- A. MASUKKAN DATA KE TABEL ---
-            // Pastikan urutan ini SAMA PERSIS dengan Header di atas
+            //  MASUKKAN DATA KE TABEL
             Object[] row = {
-                n.getKodeMk(),      // Kolom 1
-                n.getNamaMk(),      // Kolom 2
-                n.getSks(),         // Kolom 3
-                n.getNilaiAngka(),  // Kolom 4 (NA)
-                n.getNilaiHuruf(),  // Kolom 5 (NH)
-                n.getSemester()     // Kolom 6
+                n.getKodeMk(),     
+                n.getNamaMk(),      
+                n.getSks(),        
+                n.getNilaiAngka(),  
+                n.getNilaiHuruf(),  
+                n.getSemester()     
             };
             model.addRow(row);
             
-            // --- B. HITUNG MATEMATIKA IPK (Di balik layar) ---
+            //  HITUNG MATEMATIKA IPK
             double bobot = hitungBobot(n.getNilaiHuruf()); 
             int sksSaatIni = n.getSks();
             
-            rekap.setTotalSks(rekap.getTotalSks() + sksSaatIni); // Jumlahkan SKS
-            totalBobotKaliSks += (bobot * sksSaatIni);           // Jumlahkan Mutu
+            rekap.setTotalSks(rekap.getTotalSks() + sksSaatIni); 
+            totalBobotKaliSks += (bobot * sksSaatIni);           
         }
         
         // 5. Hitung IPK Akhir
@@ -81,14 +80,14 @@ public class TranskripController {
         }
         
         // 6. Update Tampilan View
-        view.setTabelTranskrip(model); // Tabel terisi
+        view.setTabelTranskrip(model); 
         
         // Update Label Total SKS & IPK
         view.setTotalSks(String.valueOf(rekap.getTotalSks()));
         view.setIpk(String.format("%.2f", rekap.getIpk())); 
     }
     
-    // Helper: Konversi Huruf ke Angka Bobot
+    //  Konversi Huruf ke Angka Bobot
     private double hitungBobot(String huruf) {
         if (huruf == null) return 0.0;
         switch (huruf.toUpperCase()) {

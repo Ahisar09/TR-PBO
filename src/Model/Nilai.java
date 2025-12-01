@@ -7,19 +7,19 @@ public class Nilai {
     private int idDosen;
     private int idKelas;
     private String semester;
-    private double nilaiAngka; // decimal(5,2)
-    private String nilaiHuruf; // A, B, C, dll
-    private String status;     // 'diambil', 'hapus'
+    private double nilaiAngka; 
+    private String nilaiHuruf; 
+    private String status;     
     private String keterangan;
 
-    // --- Helper Attributes (Untuk Tampilan Dashboard) ---
+    
     private String namaMk;
     private String kodeMk;
-    private int sks; // Penting untuk perhitungan IPK
+    private int sks;
 
     public Nilai() {}
 
-    // Getter & Setter Utama
+    // Getter & Setter 
     public int getIdNilai() { return idNilai; }
     public void setIdNilai(int idNilai) { this.idNilai = idNilai; }
 

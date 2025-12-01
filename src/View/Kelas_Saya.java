@@ -152,7 +152,7 @@ public class Kelas_Saya extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new Kelas_Saya().setVisible(true));
     }   
     
-    // Setter Nama Dosen (Untuk Label di atas)
+    // Setter Nama Dosen 
     public void setNamaDosen(String nama) {
         jLabel2.setText("Nama Dosen : " + nama);
     }

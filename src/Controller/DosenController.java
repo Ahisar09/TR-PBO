@@ -23,7 +23,7 @@ public class DosenController {
         this.dosenLog = dosen;
         this.dao = new DosenDAO();
         
-        // PENTING: Isi data saat pertama kali dibuka
+       
         initView();
         
         initController();
@@ -33,14 +33,12 @@ public class DosenController {
         if (dosenLog != null) {
             view.setNamaDosen(dosenLog.getNama());
         }
-        isiTabelKelas(); // <--- Panggil fungsi isi tabel
+        isiTabelKelas(); 
     }
     
-    // Update method ini di DosenController.java
     private void isiTabelKelas() {
         List<Kelas> listKelas = dao.getKelasAjar(dosenLog.getIdDosen());
         
-        // Tambahkan Kolom "Ruang"
         String[] kolom = {"Mata Kuliah", "Id Kelas", "Hari", "Jam", "Ruang"};
         DefaultTableModel model = new DefaultTableModel(null, kolom);
         
@@ -52,7 +50,7 @@ public class DosenController {
                 k.getIdKelas(),
                 k.getHari(),
                 formatJam,
-                k.getRuang() // Masukkan data ruang ke tabel
+                k.getRuang() 
             };
             model.addRow(row);
         }
@@ -62,9 +60,9 @@ public class DosenController {
 
     private void initController() {
         
-        // --- LOGIKA TOMBOL PROFIL ---
+        // LOGIKA TOMBOL PROFIL
         view.getButtonProfil().addActionListener(e -> {
-            view.dispose(); // Tutup Dashboard
+            view.dispose(); 
             
             // 1. Buat Object View LANGSUNG dengan tipe kelasnya (Bukan javax.swing.JFrame)
             View.Profile_Dosen frameProfil = new View.Profile_Dosen(); 
@@ -79,16 +77,12 @@ public class DosenController {
             frameProfil.setVisible(true);
         });
         
-        // --- LOGIKA TOMBOL KELAS SAYA ---
+        // LOGIKA TOMBOL KELAS SAYA 
         view.getButtonKelas().addActionListener(e -> {
-            view.dispose(); // Tutup Dashboard
-            
-            // PERBAIKAN PENTING DI SINI:
-            // Jangan gunakan 'javax.swing.JFrame frameKelas = ...'
-            // Gunakan nama class view-nya secara spesifik:
+            view.dispose(); 
             View.Kelas_Saya frameKelas = new View.Kelas_Saya(); 
             
-            // Panggil Controller (Sekarang pasti cocok tipe datanya)
+            // Panggil Controller 
             new Controller.KelasSayaController(frameKelas, dosenLog);
             
             // Setting Tampilan
@@ -97,11 +91,11 @@ public class DosenController {
             frameKelas.setVisible(true);
         });
         
-        // --- LOGIKA TOMBOL PRESENSI ---
+        // LOGIKA TOMBOL PRESENSI
         view.getButtonPresensi().addActionListener(e -> {
-            view.dispose(); // Tutup Dashboard
+            view.dispose(); 
             
-            // Buka Jendela Presensi
+            // Buka  Presensi
             JFrame framePresensi = new JFrame("Presensi Mahasiswa");
             View.Presensi panelPresensi = new View.Presensi();
             
@@ -115,7 +109,7 @@ public class DosenController {
             framePresensi.setVisible(true);
         });
         
-        // --- LOGIKA TOMBOL INPUT NILAI ---
+        // LOGIKA TOMBOL INPUT NILAI 
         view.getButtonNilai().addActionListener(e -> {
             view.dispose();
             
@@ -129,7 +123,7 @@ public class DosenController {
         });
         
         
-        // --- LOGIKA TOMBOL LOGOUT ---
+        // LOGIKA TOMBOL LOGOUT
         view.getButtonLogout().addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(view, "Yakin ingin keluar?", "Logout", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {

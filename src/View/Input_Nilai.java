@@ -230,7 +230,7 @@ public class Input_Nilai extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     
-    // --- KOMPONEN ---
+    // KOMPONEN 
     public javax.swing.JComboBox<String> getComboBoxKelas() { return jComboBox1; }
     public javax.swing.JTable getTable() { return jTable1; }
     
@@ -238,12 +238,12 @@ public class Input_Nilai extends javax.swing.JFrame {
         jTable1.setModel(model);
     }
     
-    // --- MODE EDIT ---
+    // MODE EDIT
     public void setEditMode(boolean mode) {
         Button_Edit.setEnabled(!mode);
         Button_Simpan.setEnabled(mode);
         Button_Batal.setEnabled(mode);
-        jTable1.setEnabled(mode); // Tabel hanya bisa diklik kalau mode edit nyala
+        jTable1.setEnabled(mode); 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Button_Batal;

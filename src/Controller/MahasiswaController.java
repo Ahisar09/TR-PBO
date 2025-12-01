@@ -6,8 +6,6 @@ import Model.PendidikanDAO;
 import Model.Tagihan;
 import View.Dashboard_Mahasiswa;
 import View.Login;
-
-// Import View lain
 import View.Jadwal;
 import View.KST;
 import View.Transkrip_Nilai;
@@ -29,16 +27,16 @@ public class MahasiswaController {
         this.mahasiswaLog = mhs;
         this.dao = new PendidikanDAO();
 
-        // 1. Tampilkan Data Awal
+       
         isiDataDashboard();
         
-        // 2. Pasang Event Listener (Agar tombol berfungsi)
+        
         initController();
     }
 
     private void initController() {
         
-        // --- LOGIKA TOMBOL PROFILE ---
+        // LOGIKA TOMBOL PROFILE 
         view.getButtonProfile().addActionListener(e -> {
             view.dispose(); 
             View.Profile_Mahasiswa profileView = new View.Profile_Mahasiswa();
@@ -49,7 +47,7 @@ public class MahasiswaController {
             profileView.setVisible(true);
         });
         
-        // --- LOGIKA TOMBOL REGISTRASI MATAKULIAH (RMK) ---
+        // LOGIKA TOMBOL REGISTRASI MATAKULIAH 
         view.getButtonRMK().addActionListener(e -> {
             view.dispose(); 
             javax.swing.JFrame frameRmk = new javax.swing.JFrame("Registrasi Matakuliah");
@@ -61,26 +59,20 @@ public class MahasiswaController {
             frameRmk.setVisible(true);
         });
         
-        // --- LOGIKA TOMBOL TAGIHAN (DIPERBAIKI) ---
+        //  LOGIKA TOMBOL TAGIHAN 
         view.getButtonTagihan().addActionListener(e -> {
-             view.dispose(); // Tutup Dashboard
+             view.dispose(); 
              
-             // 1. Buat Object View (Karena dia sudah JFrame, langsung dipakai saja)
+          
              View.Tagihan_Mahasiswa tagihanView = new View.Tagihan_Mahasiswa();
-             
-             // 2. Setting Jendela
              tagihanView.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
-             tagihanView.pack(); // Agar ukuran pas
-             tagihanView.setLocationRelativeTo(null); // Posisi Tengah
-             
-             // 3. Panggil Controller
+             tagihanView.pack(); 
+             tagihanView.setLocationRelativeTo(null); 
              new Controller.TagihanController(tagihanView, mahasiswaLog);
-             
-             // 4. Tampilkan
              tagihanView.setVisible(true);
         });
         
-        // --- LOGIKA TOMBOL LOGOUT ---
+        // LOGIKA TOMBOL LOGOUt
         view.getButtonLogout().addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(view, "Yakin ingin keluar?", "Logout", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
@@ -91,7 +83,7 @@ public class MahasiswaController {
             }
         });
 
-        // --- LOGIKA TOMBOL JADWAL ---
+        // LOGIKA TOMBOL JADWAL
         view.getButtonJadwal().addActionListener(e -> {
             view.dispose(); 
             javax.swing.JFrame frameWindow = new javax.swing.JFrame("Jadwal Kuliah");
@@ -103,7 +95,7 @@ public class MahasiswaController {
             frameWindow.setVisible(true);
         });
 
-        // --- LOGIKA TOMBOL KST ---
+        // LOGIKA TOMBOL KST 
         view.getButtonKst().addActionListener(e -> {
             view.dispose(); 
             javax.swing.JFrame frameKst = new javax.swing.JFrame("Kartu Studi Tetap");
@@ -115,41 +107,25 @@ public class MahasiswaController {
             frameKst.setVisible(true);
         });
         
-        // --- LOGIKA TOMBOL TO-DO LIST ---
+        // LOGIKA TOMBOL TODO LIST 
         view.getButtonTodoList().addActionListener(e -> {
-            view.dispose();
-            
-            // 1. Buat Frame
+            view.dispose();  
             javax.swing.JFrame frameTodo = new javax.swing.JFrame("To-Do List Mahasiswa");
-            
-            // 2. Buat Panel ToDo
             View.ToDo_List panelTodo = new View.ToDo_List();
-            
-            // 3. Masukkan Panel ke Frame
             frameTodo.setContentPane(panelTodo);
             frameTodo.pack();
             frameTodo.setLocationRelativeTo(null);
-            
-            // 4. Panggil Controller
             new Controller.TodoListController(panelTodo, mahasiswaLog);
-            
-            // 5. Tampilkan
+          
             frameTodo.setVisible(true);
         });
         
-        // --- LOGIKA TOMBOL NILAI ---
+        // LOGIKA TOMBOL NILAI 
         view.getButtonNilai().addActionListener(e -> {
-             // 1. Buat View
-             View.Transkrip_Nilai viewTranskrip = new View.Transkrip_Nilai();
-             
-             // 2. Setting agar tidak menutup seluruh aplikasi saat di-close
+             View.Transkrip_Nilai viewTranskrip = new View.Transkrip_Nilai();         
              viewTranskrip.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
-             viewTranskrip.setLocationRelativeTo(null);
-             
-             // 3. Panggil Controller
-             new Controller.TranskripController(viewTranskrip, mahasiswaLog);
-             
-             // 4. Tampilkan
+             viewTranskrip.setLocationRelativeTo(null);     
+             new Controller.TranskripController(viewTranskrip, mahasiswaLog);       
              viewTranskrip.setVisible(true);
         });
     }

@@ -199,7 +199,7 @@ public class Presensi extends javax.swing.JPanel {
     }//GEN-LAST:event_Button_KembaliActionPerformed
 
     
-    // --- GETTER KOMPONEN ---
+    // GETTER KOMPONEN 
     public javax.swing.JComboBox<String> getComboBoxMK() {
         return ComboBox_MK;
     }

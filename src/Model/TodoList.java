@@ -7,9 +7,9 @@ public class TodoList {
     private int idMahasiswa;
     private String judul;
     private String deskripsi;
-    private String prioritas; // 'rendah', 'sedang', 'tinggi'
+    private String prioritas; 
     private Date deadline;
-    private String status;    // 'pending', 'proses', 'selesai'
+    private String status;    
     private Date dibuatPada;
 
     public TodoList() {}

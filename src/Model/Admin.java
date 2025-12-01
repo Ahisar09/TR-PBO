@@ -4,8 +4,8 @@ public class Admin {
     private int idAdmin;
     private String username;
     private String password;
-    private String nama; // Nanti diisi dari 'nama_admin'
-    private String email; // Nanti diisi dari 'email_admin'
+    private String nama; 
+    private String email; 
 
     public Admin() {}
 

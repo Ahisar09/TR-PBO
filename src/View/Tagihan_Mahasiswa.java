@@ -221,13 +221,13 @@ public class Tagihan_Mahasiswa extends javax.swing.JFrame {
         if (controller != null) controller.kembali();
     }//GEN-LAST:event_Button_KembaliActionPerformed
 
-    // --- SETTER DATA DIRI ---
+    // SETTER DATA DIRI
     public void setNama(String nama) { TextField_NamaNilai.setText(nama); }
     public void setNim(String nim) { TextField_NimNilai.setText(nim); }
     public void setProdi(String prodi) { TextField_ProdiNilai.setText(prodi); }
     public void setSemester(String smt) { TextField_SemesterNilai.setText(smt); }
     
-    // --- SETTER STATUS (DENGAN WARNA) ---
+    // SETTER STATUS 
     public void setStatusHeader(String text, java.awt.Color wara) {
         TextField_Status.setText(text);
         TextField_Status.setForeground(wara); // Ubah warna font (Merah/Biru)

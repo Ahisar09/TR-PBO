@@ -190,22 +190,19 @@ public class Dashboard_Admin extends javax.swing.JFrame {
     // KODE TAMBAHAN UNTUK VIEW DASHBOARD ADMIN
     // =============================================================
     
-    // --- SETTER DATA DIRI ADMIN ---
+    // SETTER ADMIN 
     public void setNamaAdmin(String nama) {
         jLabel1.setText("👋 Selamat Datang Admin " + nama);
     }
     
     public void setDataDiri(String nama, String email) {
-        // jTextField1 adalah Nama, jTextField2 adalah Email (Sesuaikan urutan)
         jTextField1.setText(nama);
         jTextField2.setText(email);
-        
-        // Matikan edit agar hanya read-only
         jTextField1.setEditable(false);
         jTextField2.setEditable(false);
     }
 
-    // --- GETTER TOMBOL (Agar Controller bisa memberi aksi) ---
+    // GETTER TOMBOL 
     public javax.swing.JButton getButtonMahasiswa() { return Button_Mahasiswa; }
     public javax.swing.JButton getButtonDosen() { return Button_Dosen; }
     public javax.swing.JButton getButtonTagihan() { return Button_Jadwal; } // Asumsi Button_Jadwal itu Tagihan

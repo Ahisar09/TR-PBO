@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Mahasiswa;
-import Model.Kelas; // atau Model.Nilai tergantung yang dipakai
+import Model.Kelas;
 import Model.PendidikanDAO;
 import View.Dashboard_Mahasiswa;
 import View.KST;
@@ -20,16 +20,12 @@ public class KSTController {
         this.mahasiswaLog = mhs;
         this.dao = new PendidikanDAO();
         
-        // PENTING: Sambungkan Controller ke View
         view.setController(this); 
         
         isiDataDiri();
         isiTabelKst();
-        // initListener tidak wajib jika pakai ActionPerformed di View
     }
     
-    // ... (Method isiDataDiri dan isiTabelKst TETAP SAMA seperti sebelumnya) ...
-    // ... Pastikan method isiTabelKst ada di sini ...
 
     public void isiDataDiri() {
          if (mahasiswaLog != null) {
@@ -39,11 +35,10 @@ public class KSTController {
     }
     
     public void isiTabelKst() {
-        // ... (Copy paste isi tabel KST yang sudah Anda buat sebelumnya) ...
-        // Agar tabel ke-refresh setelah hapus
+     
          String[] kolom = {"Kode MK", "Matakuliah", "SKS", "Hari", "Waktu"};
          DefaultTableModel model = new DefaultTableModel(null, kolom);
-         // ... logika ambil data ...
+         //  logika ambil data
          String semesterAktif = "20231";
          List<Kelas> listKst = dao.getJadwalKuliah(mahasiswaLog.getIdMahasiswa(), semesterAktif);
          if (listKst != null) {
@@ -57,7 +52,7 @@ public class KSTController {
          view.setTableKST(model);
     }
 
-    // --- LOGIKA HAPUS (DIPANGGIL OLEH TOMBOL DI VIEW) ---
+    // LOGIKA HAPUS 
     public void hapusMatakuliah(String kodeMk) {
         int confirm = JOptionPane.showConfirmDialog(view, 
                 "Yakin ingin menghapus matakuliah " + kodeMk + "?", 
@@ -68,7 +63,7 @@ public class KSTController {
             
             if (sukses) {
                 JOptionPane.showMessageDialog(view, "Matakuliah berhasil dihapus!");
-                isiTabelKst(); // REFRESH TABEL AGAR DATA HILANG DARI LAYAR
+                isiTabelKst(); 
             } else {
                 JOptionPane.showMessageDialog(view, "Gagal menghapus. Coba lagi.");
             }
@@ -76,17 +71,14 @@ public class KSTController {
     }
     
     
-    // --- TAMBAHKAN METHOD INI UNTUK NAVIGASI KEMBALI ---
+    // METHOD KEMBALI 
     public void kembali() {
-        // 1. Cari Jendela (Frame) yang membungkus Panel KST ini, lalu tutup
         java.awt.Window parentWindow = javax.swing.SwingUtilities.getWindowAncestor(view);
         if (parentWindow != null) {
             parentWindow.dispose();
         }
-        
-        // 2. Buka kembali Dashboard
         Dashboard_Mahasiswa dashboard = new Dashboard_Mahasiswa();
-        new MahasiswaController(dashboard, mahasiswaLog); // Bawa data mahasiswa agar tidak error
+        new MahasiswaController(dashboard, mahasiswaLog); 
         dashboard.setVisible(true);
     }
 }

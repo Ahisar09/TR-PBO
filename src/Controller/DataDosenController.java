@@ -31,9 +31,6 @@ public class DataDosenController {
     
     public void isiTabel() {
         listDosen = dao.getAllDosen();
-        
-        // REVISI: Hapus "Jabatan" dari Header
-        // Sekarang hanya tinggal 4 Kolom
         String[] kolom = {"NIP", "Nama Dosen", "Email", "Prodi"};
         DefaultTableModel model = new DefaultTableModel(null, kolom);
         
@@ -43,14 +40,14 @@ public class DataDosenController {
                 d.getNama(), 
                 d.getEmail(),
                 d.getProdi()
-                // Kolom Jabatan ("-") SUDAH DIHAPUS
+         
             };
             model.addRow(row);
         }
         view.setTabelDosen(model);
     }
     
-    // --- LOGIKA TOMBOL ---
+    // LOGIKA TOMBOL 
 
     public void klikKembali() {
         view.dispose();
@@ -91,7 +88,7 @@ public class DataDosenController {
 
         Dosen dosenLama = listDosen.get(row);
 
-        // Form Input Popup (Hanya Nama, Email, Prodi)
+        // Form Input Popup 
         JTextField fieldNama = new JTextField(dosenLama.getNama());
         JTextField fieldEmail = new JTextField(dosenLama.getEmail());
         JTextField fieldProdi = new JTextField(dosenLama.getProdi());

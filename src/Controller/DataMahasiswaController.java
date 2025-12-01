@@ -27,14 +27,13 @@ public class DataMahasiswaController {
         this.dao = new AdminDAO();
         
         view.setController(this);
-        // initController(); // BAGIAN INI DIHAPUS agar tidak bentrok dengan View
         isiTabel();
     }
     
     public void isiTabel() {
         listMahasiswa = dao.getAllMahasiswa();
         
-        // Header sesuai gambar: NIM, Nama, Program Studi, Semester, Status
+        // Header
         String[] kolom = {"NIM", "Nama", "Program Studi", "Semester", "Status"};
         DefaultTableModel model = new DefaultTableModel(null, kolom);
         
@@ -51,7 +50,6 @@ public class DataMahasiswaController {
         view.getTabelMahasiswa().setModel(model);
     }
 
-    // UBAH DARI PRIVATE KE PUBLIC
     public void klikKembali() {
         view.dispose();
         Dashboard_Admin dash = new Dashboard_Admin();
@@ -59,7 +57,6 @@ public class DataMahasiswaController {
         dash.setVisible(true);
     }
 
-    // UBAH DARI PRIVATE KE PUBLIC
     public void klikHapus() {
         int row = view.getTabelMahasiswa().getSelectedRow();
         if (row == -1) {
@@ -83,8 +80,8 @@ public class DataMahasiswaController {
         }
     }
 
-    // --- LOGIKA EDIT POPUP ---
-    // UBAH DARI PRIVATE KE PUBLIC
+    //  LOGIKA EDIT 
+
     public void klikEdit() {
         int row = view.getTabelMahasiswa().getSelectedRow();
         if (row == -1) {
@@ -99,12 +96,12 @@ public class DataMahasiswaController {
         JTextField fieldProdi = new JTextField(mhsLama.getProdi());
         JTextField fieldSemester = new JTextField(String.valueOf(mhsLama.getSemesterMasuk()));
         
-        // Combo Box untuk Status (Sesuai ENUM database: aktif, nonaktif)
+        // Combo Box untuk Status 
         String[] statusOpsi = {"aktif", "nonaktif"};
         JComboBox<String> comboStatus = new JComboBox<>(statusOpsi);
         comboStatus.setSelectedItem(mhsLama.getStatus());
 
-        // 2. Susun Panel Layout
+        // 2. Panel Layout
         JPanel panel = new JPanel(new GridLayout(0, 1));
         panel.add(new JLabel("NIM (Tidak bisa diubah): " + mhsLama.getNim()));
         

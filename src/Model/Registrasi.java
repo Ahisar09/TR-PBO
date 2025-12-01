@@ -6,10 +6,10 @@ public class Registrasi {
     private int idRegistrasi;
     private int idMahasiswa;
     private Date tanggalRegistrasi;
-    private String semester; // Contoh: "20231" (Gasal 2023)
-    private String status;   // 'diambil', 'hapus'
+    private String semester; 
+    private String status;   
     private String keterangan;
-    private int idAdmin; // Admin yang memvalidasi
+    private int idAdmin; 
 
     public Registrasi() {}
 

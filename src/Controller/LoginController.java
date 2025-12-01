@@ -8,7 +8,7 @@ import Model.Admin;
 import View.Login;
 import View.Dashboard_Mahasiswa;
 import View.Dashboard_Dosen;
-import View.Dashboard_Admin; // SUDAH DIAKTIFKAN
+import View.Dashboard_Admin; 
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,10 +26,7 @@ public class LoginController {
     }
 
     private void initController() {
-        // Klik tombol Login
         view.getBtnLogin().addActionListener(e -> prosesLogin());
-        
-        // Tekan Enter di Password Field juga akan memicu login
         view.getPasswordField().addActionListener(e -> prosesLogin());
     }
 
@@ -43,7 +40,7 @@ public class LoginController {
             return;
         }
 
-        // 1. CEK MAHASISWA (Login pakai NIM)
+        //  MAHASISWA 
         Mahasiswa mhs = dao.login(inputUser, inputPass); 
         if (mhs != null) {
             view.showMessage("Login Berhasil! Selamat Datang Mahasiswa, " + mhs.getNama());
@@ -52,7 +49,7 @@ public class LoginController {
             return; 
         }
 
-        // 2. CEK DOSEN (Login pakai NIP)
+        // DOSEN
         Dosen dsn = dao.loginDosen(inputUser, inputPass);
         if (dsn != null) {
             view.showMessage("Login Berhasil! Selamat Datang Dosen, " + dsn.getNama());
@@ -61,7 +58,7 @@ public class LoginController {
             return; 
         }
         
-        // 3. CEK SUPER ADMIN (Login pakai Username)
+        // SUPER ADMIN 
         Admin adm = dao.loginAdmin(inputUser, inputPass);
         if (adm != null) {
             view.showMessage("Login Berhasil! Selamat Datang Admin, " + adm.getNama());
@@ -70,11 +67,11 @@ public class LoginController {
             return; 
         }
 
-        // 4. JIKA SEMUA GAGAL
+        //  GAGAL
         view.showMessage("Login Gagal! Akun tidak ditemukan atau Password salah.");
     }
 
-    // --- METHOD MEMBUKA DASHBOARD ---
+    // METHOD MEMBUKA DASHBOARD 
 
     private void bukaDashboardMahasiswa(Mahasiswa mhs) {
         Dashboard_Mahasiswa dash = new Dashboard_Mahasiswa();
@@ -89,9 +86,6 @@ public class LoginController {
     }
     
     private void bukaDashboardAdmin(Admin adm) {
-        // --- BAGIAN INI SUDAH DIPERBAIKI ---
-        // Sekarang membuka Dashboard Admin yang sesungguhnya
-        
         View.Dashboard_Admin dash = new View.Dashboard_Admin();
         new Controller.AdminController(dash, adm); 
         dash.setVisible(true);

@@ -23,20 +23,17 @@ public class AdminController {
         initController();
     }
     
-    // --- 1. MENAMPILKAN DATA DIRI ADMIN DI DASHBOARD ---
+    // DATA DIRI ADMIN DI DASHBOARD
     private void initView() {
         if (adminLog != null) {
-            // Set Label Selamat Datang
             view.setNamaAdmin(adminLog.getNama());
-            
-            // Set Field Data Diri (Nama & Email)
             view.setDataDiri(adminLog.getNama(), adminLog.getEmail());
         }
     }
     
     private void initController() {
         
-        // A. TOMBOL DATA MAHASISWA
+        // TOMBOL DATA MAHASISWA
         view.getButtonMahasiswa().addActionListener(e -> {
              view.dispose();
              View.Data_Mahasiswa viewMhs = new View.Data_Mahasiswa();
@@ -45,7 +42,7 @@ public class AdminController {
              viewMhs.setVisible(true);
         });
         
-        // B. TOMBOL DATA DOSEN
+        // TOMBOL DATA DOSEN
         view.getButtonDosen().addActionListener(e -> {
             view.dispose(); 
             View.Data_Dosen viewDosen = new View.Data_Dosen();
@@ -54,7 +51,7 @@ public class AdminController {
             viewDosen.setVisible(true);
         });
         
-        // C. TOMBOL TAGIHAN (UPDATED)
+        //  TOMBOL TAGIHAN (UPDATED)
         view.getButtonTagihan().addActionListener(e -> {
             view.dispose();
             View.Form_Tagihan viewTagihan = new View.Form_Tagihan();
@@ -63,13 +60,13 @@ public class AdminController {
             viewTagihan.setVisible(true);
         });
         
-        // D. TOMBOL DASHBOARD (Refresh)
+        // TOMBOL DASHBOARD (Refresh)
         view.getButtonDashboard().addActionListener(e -> {
             initView();
             JOptionPane.showMessageDialog(view, "Dashboard disegarkan.");
         });
         
-        // E. TOMBOL LOGOUT
+        //  TOMBOL LOGOUT
         view.getButtonLogout().addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(view, 
                 "Apakah Anda yakin ingin keluar?", 

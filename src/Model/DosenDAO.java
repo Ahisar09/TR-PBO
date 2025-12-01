@@ -51,9 +51,8 @@ public class DosenDAO {
     }
 
 
-    // ==========================================
-    // PERBAIKAN: AMBIL MAHASISWA DARI TABEL Kst
-    // ==========================================
+  
+    // AMBIL MAHASISWA DARI TABEL Kst
     public List<Presensi> getMahasiswaKelas(int idKelas, int pertemuanKe) {
         List<Presensi> list = new ArrayList<>();
 
@@ -88,7 +87,7 @@ public class DosenDAO {
     }
 
 
-    // SIMPAN PRESENSI PER PERTEMUAN
+    // SIMPAN PRESENSI 
     public boolean simpanPresensi(int idKelas, int idMahasiswa, int pertemuanKe, String status) {
         try {
             // Hapus dulu presensi per pertemuan
@@ -117,7 +116,7 @@ public class DosenDAO {
         }
     }
     
-    // --- FITUR UPDATE PROFIL DOSEN ---
+    // UPDATE PROFIL DOSEN 
     public boolean updateProfilDosen(Model.Dosen d) {
         String sql = "UPDATE dosen SET nama_dosen=?, email=?, no_hp=?, password=? WHERE id_dosen=?";
         
@@ -125,7 +124,7 @@ public class DosenDAO {
             ps.setString(1, d.getNama());
             ps.setString(2, d.getEmail());
             ps.setString(3, d.getNoHp());
-            ps.setString(4, d.getPassword()); // Asumsi password juga bisa diedit di sini
+            ps.setString(4, d.getPassword()); 
             ps.setInt(5, d.getIdDosen());
             
             return ps.executeUpdate() > 0;
@@ -136,10 +135,9 @@ public class DosenDAO {
     }
     
     
-    // --- FITUR INPUT NILAI DOSEN ---
+    // INPUT NILAI DOSEN 
     
     // 1. Ambil Mahasiswa + Nilai saat ini di kelas tersebut
-    //    (Mirip presensi, tapi kita ambil nilai_angka & nilai_huruf)
     public List<Model.Nilai> getNilaiMahasiswaKelas(int idKelas) {
         List<Model.Nilai> list = new ArrayList<>();
         
@@ -161,9 +159,6 @@ public class DosenDAO {
                 n.setIdMahasiswa(rs.getInt("id_mahasiswa"));
                 n.setNilaiAngka(rs.getDouble("nilai_angka"));
                 n.setNilaiHuruf(rs.getString("nilai_huruf"));
-                
-                // Simpan NIM & Nama di helper attribute (Model Nilai perlu ditambah getter setter ini)
-                // Atau kita pakai hack: simpan di KodeMK/NamaMK sementara
                 n.setKodeMk(rs.getString("nim")); 
                 n.setNamaMk(rs.getString("nama")); 
                 

@@ -244,7 +244,7 @@ public class Transkrip_Nilai extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new Transkrip_Nilai().setVisible(true));
     }   
     
-        // --- 2. SETTER UNTUK ISI DATA ---
+        // SETTER ISI DATA 
     public void setNama(String nama) { TextField_Nama.setText(nama); }
     public void setNim(String nim) { TextField_NIM.setText(nim); }
     public void setProdi(String prodi) { TextField_Prodi.setText(prodi); }

@@ -16,11 +16,8 @@ public class FormTagihanController {
     private AdminDAO dao;
     private Admin adminLog;
     
-    // List data
     private List<Mahasiswa> listMahasiswa; 
     private List<Tagihan> listTagihan;
-    
-    // Penanda ID saat Edit
     private int idTagihanTerpilih = 0; 
 
     public FormTagihanController(Form_Tagihan view, Admin admin) {
@@ -28,7 +25,6 @@ public class FormTagihanController {
         this.adminLog = admin;
         this.dao = new AdminDAO();
         
-        // Hubungkan View dengan Controller
         view.setController(this);
         
         initForm();
@@ -37,12 +33,12 @@ public class FormTagihanController {
     }
     
     private void initForm() {
-        // Setup Combo Status
+        // Combo Status
         view.getComboStatus().removeAllItems();
         view.getComboStatus().addItem("Belum"); 
         view.getComboStatus().addItem("Lunas");
         
-        // Setup Listener Tabel (Klik Baris) - Ini TETAP ADA karena MouseListener beda dengan Action
+        //  Listener Tabel (Klik Baris) 
         view.getTabelTagihan().addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -50,7 +46,7 @@ public class FormTagihanController {
             }
         });
         
-        // Awal load: Matikan tombol edit
+     
         view.getBtnEdit().setEnabled(false);
     }
     
@@ -59,7 +55,6 @@ public class FormTagihanController {
         view.getComboMahasiswa().removeAllItems();
         
         for (Mahasiswa m : listMahasiswa) {
-            // Menampilkan Nama (NIM)
             view.getComboMahasiswa().addItem(m.getNama() + " (" + m.getNim() + ")");
         }
     }
@@ -73,7 +68,7 @@ public class FormTagihanController {
             Object[] row = {
                 t.getNamaMahasiswa(),
                 t.getJenisTagihan(),
-                String.format("Rp %,.0f", t.getJumlah()), // Format angka
+                String.format("Rp %,.0f", t.getJumlah()), 
                 t.getJatuhTempo(),
                 t.getStatusBayar()
             };
@@ -156,7 +151,7 @@ public class FormTagihanController {
             int idMhs = listMahasiswa.get(idxMhs).getIdMahasiswa();
             
             Tagihan t = new Tagihan();
-            t.setIdTagihan(idTagihanTerpilih); // ID untuk WHERE clause
+            t.setIdTagihan(idTagihanTerpilih); 
             t.setIdMahasiswa(idMhs);
             t.setJenisTagihan(view.getFieldJenis().getText());
             t.setJumlah(Double.parseDouble(view.getFieldJumlah().getText()));

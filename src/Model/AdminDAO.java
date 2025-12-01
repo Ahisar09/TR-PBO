@@ -9,12 +9,12 @@ public class AdminDAO {
     private Connection conn;
 
     public AdminDAO() {
-        this.conn = KoneksiDB.getConnection(); // Pakai KoneksiDB yang sudah ada
+        this.conn = KoneksiDB.getConnection(); 
     }
 
-    // ==========================================================
-    // 1. MANAJEMEN MAHASISWA (CRUD)
-    // ==========================================================
+  
+    //MANAJEMEN MAHASISWA (CRUD)
+  
     
     // READ MAHASISWA
     public List<Mahasiswa> getAllMahasiswa() {
@@ -44,8 +44,8 @@ public class AdminDAO {
             ps.setString(1, m.getNama());
             ps.setString(2, m.getProdi());
             ps.setInt(3, m.getSemesterMasuk());
-            ps.setString(4, m.getStatus()); // Enum: 'aktif' atau 'nonaktif'
-            ps.setString(5, m.getNim());    // Where clause
+            ps.setString(4, m.getStatus()); 
+            ps.setString(5, m.getNim());    
             return ps.executeUpdate() > 0;
         } catch (SQLException e) { 
             e.printStackTrace(); 
@@ -62,11 +62,10 @@ public class AdminDAO {
         } catch (SQLException e) { e.printStackTrace(); return false; }
     }
 
-    // ==========================================================
-    // 2. MANAJEMEN DOSEN (CRUD)
-    // ==========================================================
+
+    //  MANAJEMEN DOSEN 
     
-    /// READ (Hapus pengambilan no_hp)
+    /// READ 
     public List<Dosen> getAllDosen() {
         List<Dosen> list = new ArrayList<>();
         String sql = "SELECT * FROM dosen ORDER BY nama_dosen ASC";
@@ -93,8 +92,8 @@ public class AdminDAO {
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, d.getNama());
             ps.setString(2, d.getEmail());
-            ps.setString(3, d.getProdi()); // Geser index jadi 3
-            ps.setString(4, d.getNip());   // Geser index jadi 4 (Where clause)
+            ps.setString(3, d.getProdi()); 
+            ps.setString(4, d.getNip());   
             
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -103,7 +102,7 @@ public class AdminDAO {
         }
     }
     
-    // UPDATE & DELETE (Mirip Mahasiswa, tinggal sesuaikan query)
+    // UPDATE & DELETE
     public boolean hapusDosen(String nip) {
         try (PreparedStatement ps = conn.prepareStatement("DELETE FROM dosen WHERE nip=?")) {
             ps.setString(1, nip);
@@ -116,10 +115,8 @@ public class AdminDAO {
     
     
 
-    // ==========================================================
-    // 3. MANAJEMEN TAGIHAN (Buat Tagihan Baru)
-    // ==========================================================
-    
+   
+    //  MANAJEMEN TAGIHAN (Buat Tagihan Baru)
     public boolean buatTagihan(Tagihan t) {
         String sql = "INSERT INTO tagihan (id_mahasiswa, jenis_tagihan, jumlah, jatuh_tempo, status_bayar) VALUES (?, ?, ?, ?, 'belum')";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -131,20 +128,18 @@ public class AdminDAO {
         } catch (SQLException e) { e.printStackTrace(); return false; }
     }
     
-    // Cari ID Mahasiswa berdasarkan NIM (Bantu buat input tagihan)
+    // Cari ID Mahasiswa berdasarkan NIM 
     public int getIdMahasiswaByNim(String nim) {
         try (PreparedStatement ps = conn.prepareStatement("SELECT id_mahasiswa FROM mahasiswa WHERE nim=?")) {
             ps.setString(1, nim);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) return rs.getInt(1);
         } catch (Exception e) {}
-        return 0; // Tidak ketemu
+        return 0; 
     }
     
     
-    // ==========================================================
-    // 4. MANAJEMEN TAGIHAN (CRUD)
-    // ==========================================================
+    // 4. MANAJEMEN TAGIHAN 
 
     // READ (JOIN Tabel Tagihan & Mahasiswa)
     public List<Tagihan> getAllTagihan() {
@@ -157,7 +152,7 @@ public class AdminDAO {
                 Tagihan t = new Tagihan();
                 t.setIdTagihan(rs.getInt("id_tagihan"));
                 t.setIdMahasiswa(rs.getInt("id_mahasiswa"));
-                t.setNamaMahasiswa(rs.getString("nama")); // Set Nama dari tabel Mahasiswa
+                t.setNamaMahasiswa(rs.getString("nama")); 
                 t.setJenisTagihan(rs.getString("jenis_tagihan"));
                 t.setJumlah(rs.getDouble("jumlah"));
                 t.setJatuhTempo(rs.getDate("jatuh_tempo"));
@@ -190,7 +185,7 @@ public class AdminDAO {
             ps.setDouble(3, t.getJumlah());
             ps.setDate(4, new java.sql.Date(t.getJatuhTempo().getTime()));
             ps.setString(5, t.getStatusBayar());
-            ps.setInt(6, t.getIdTagihan()); // WHERE clause
+            ps.setInt(6, t.getIdTagihan()); 
             return ps.executeUpdate() > 0;
         } catch (SQLException e) { e.printStackTrace(); return false; }
     }

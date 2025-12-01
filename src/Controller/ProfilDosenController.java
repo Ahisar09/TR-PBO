@@ -20,7 +20,7 @@ public class ProfilDosenController {
         view.setController(this);
         
         isiFormulir();
-        view.setEditMode(false); // Default terkunci
+        view.setEditMode(false); 
     }
     
     public void isiFormulir() {
@@ -33,7 +33,7 @@ public class ProfilDosenController {
         
     }
     
-    // --- LOGIKA TOMBOL ---
+    // LOGIKA TOMBOL 
     
     public void klikEdit() {
         view.setEditMode(true);
@@ -42,7 +42,7 @@ public class ProfilDosenController {
     
     public void klikBatal() {
         view.setEditMode(false);
-        isiFormulir(); // Reset data
+        isiFormulir(); 
     }
     
     public void klikSimpan() {

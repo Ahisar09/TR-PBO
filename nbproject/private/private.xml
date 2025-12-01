@@ -2,17 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Kuliah/PBO/TR_PBO/src/Model/Tagihan.java</file>
-            <file>file:/C:/Kuliah/PBO/TR_PBO/src/Controller/FormTagihanController.java</file>
-            <file>file:/C:/Kuliah/PBO/TR_PBO/src/Model/AdminDAO.java</file>
-            <file>file:/C:/Kuliah/PBO/TR_PBO/src/Controller/Main.java</file>
-            <file>file:/C:/Kuliah/PBO/TR_PBO/src/Controller/AdminController.java</file>
-            <file>file:/C:/Kuliah/PBO/TR_PBO/src/View/Form_Tagihan.java</file>
-            <file>file:/C:/Kuliah/PBO/TR_PBO/src/Model/Mahasiswa.java</file>
-            <file>file:/C:/Kuliah/PBO/TR_PBO/src/Controller/JadwalController.java</file>
-            <file>file:/C:/Kuliah/PBO/TR_PBO/src/View/Jadwal.java</file>
-            <file>file:/C:/Kuliah/PBO/TR_PBO/src/Model/PendidikanDAO.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

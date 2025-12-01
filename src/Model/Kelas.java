@@ -4,7 +4,7 @@ import java.sql.Time;
 
 public class Kelas {
 
-    // --- ATRIBUT DATABASE ---
+    // ATRIBUT 
     private int idKelas;
     private int idMk;
     private int idDosen;
@@ -13,8 +13,6 @@ public class Kelas {
     private Time jamSelesai;
     private String ruang;
     private int kuota;
-
-    // --- ATRIBUT TAMBAHAN (HELPER) UNTUK JOIN ---
     private String kodeMk;
     private String namaMk;
     private int sks;
@@ -22,7 +20,7 @@ public class Kelas {
 
     public Kelas() {}
 
-    // ================= GETTER & SETTER LENGKAP =================
+    // GETTER & SETTER
 
     public int getIdKelas() { return idKelas; }
     public void setIdKelas(int idKelas) { this.idKelas = idKelas; }

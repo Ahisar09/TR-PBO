@@ -129,7 +129,6 @@ public class Data_Dosen extends javax.swing.JFrame {
     }//GEN-LAST:event_Button_KembaliActionPerformed
     
     
-    // ... (Getter dan Setter lain TETAP SAMA) ...
     public javax.swing.JTable getTable() { return Table_DataDosen; }
     public javax.swing.JButton getButtonKembali() { return Button_Kembali; }
     public javax.swing.JButton getButtonHapus() { return Button_Hapus; }

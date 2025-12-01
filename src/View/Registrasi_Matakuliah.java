@@ -16,7 +16,6 @@ public class Registrasi_Matakuliah extends javax.swing.JPanel {
         this.controller = controller;
     }
 
-
     /**
      * Creates new form Registrasi_Matakuliah
      */
@@ -174,19 +173,18 @@ public class Registrasi_Matakuliah extends javax.swing.JPanel {
     }//GEN-LAST:event_Button_TambahActionPerformed
 
     
-    // --- 1. SETTER TABEL ---
+    // SETTER TABEL
     public void setTabelRMK(javax.swing.table.DefaultTableModel model) {
         // Ganti 'Table_RMK' sesuai nama variabel tabel Anda
         Table_Registrasi.setModel(model);
     }
     
-    // --- 2. GETTER KOMPONEN (PENTING) ---
+    // GETTER KOMPONEN 
     public javax.swing.JTable getTableRMK() {
         return Table_Registrasi;
     }
     
     public String getSelectedSemester() {
-        // Ganti 'ComboBox_Semester' sesuai nama variabel Anda
         return ComboBox_Semester.getSelectedItem().toString();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

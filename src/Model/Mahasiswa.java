@@ -1,16 +1,15 @@
 package Model;
 
-import java.util.Date; // Digunakan untuk tipe data tanggal
+import java.util.Date; 
 
 public class Mahasiswa {
     
-    // --- ATRIBUT (Sesuai Kolom Database) ---
     private int idMahasiswa;
     private String nim;
     private String nama;
     private String tempatLahir;
     private Date tanggalLahir;
-    private String jk; // 'L' atau 'P'
+    private String jk; 
     private String alamat;
     private String email;
     private String noHp;
@@ -19,18 +18,15 @@ public class Mahasiswa {
     private String bank;
     private String noRekening;
     private String namaRekening;
-    private String status; // 'aktif' atau 'nonaktif'
+    private String status; 
     private int semesterMasuk;
     private String prodi;
     private String password;
 
     // --- CONSTRUCTOR ---
-
-    // 1. Constructor Kosong (Wajib ada untuk pembuatan objek standar)
     public Mahasiswa() {
     }
 
-    // 2. Constructor Lengkap (Opsional, memudahkan pengisian data sekaligus)
     public Mahasiswa(int idMahasiswa, String nim, String nama, String tempatLahir, Date tanggalLahir, 
                      String jk, String alamat, String email, String noHp, String nik, String kk, 
                      String bank, String noRekening, String namaRekening, String status, 
@@ -56,7 +52,6 @@ public class Mahasiswa {
     }
 
     // --- GETTER & SETTER ---
-    // (Digunakan untuk mengambil dan mengisi nilai variabel private di atas)
 
     public int getIdMahasiswa() {
         return idMahasiswa;

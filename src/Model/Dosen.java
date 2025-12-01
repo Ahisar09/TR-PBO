@@ -3,11 +3,11 @@ package Model;
 public class Dosen {
     
     private int idDosen;
-    private String nip; // GANTI NIDN JADI NIP
-    private String nama; // Nanti diisi dari kolom 'nama_dosen'
+    private String nip; 
+    private String nama; 
     private String email;
     private String noHp;
-    private String prodi; // TAMBAHAN BARU
+    private String prodi; 
     private String password;
 
     public Dosen() {}

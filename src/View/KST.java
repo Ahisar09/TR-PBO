@@ -183,42 +183,34 @@ public class KST extends javax.swing.JPanel {
     }//GEN-LAST:event_Button_KembaliActionPerformed
 
       public void setNamaMahasiswa(String nama) {
-        // Ganti 'TextField_Nama' sesuai nama variabel di desain Anda
         TextField_Nama.setText(nama);
     }
 
     public void setNimMahasiswa(String nim) {
-        // Ganti 'TextField_NIM' sesuai nama variabel di desain Anda
         TextField_NIM.setText(nim);
     }
 
     // 2. Setter untuk Tabel
     public void setTableKST(DefaultTableModel model) {
-        // Ganti 'Table_KST' sesuai nama variabel tabel Anda
         Table_KST.setModel(model);
     }
     
     // 3. Getter Tombol
     public javax.swing.JButton getBtnKembali() {
-        // Ganti 'Button_Kembali' sesuai nama tombol Anda
         return Button_Kembali;
     }
 
     public javax.swing.JButton getBtnHapus() {
-        // Ganti 'Button_Hapus' sesuai nama tombol Anda
         return Button_HapusMK; 
     }
     
-    // --- TAMBAHKAN VARIABEL INI ---
     private KSTController controller;
 
-    // --- TAMBAHKAN METHOD SETTER INI ---
    public void setController(KSTController controller) {
     this.controller = controller;
     }
 
-    
-    // Pastikan Anda juga punya getter tabel ini (untuk fitur hapus nanti)
+
     public javax.swing.JTable getTableKST() {
         return Table_KST;
     }

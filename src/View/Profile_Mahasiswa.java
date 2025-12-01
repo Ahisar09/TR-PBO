@@ -397,7 +397,7 @@ public class Profile_Mahasiswa extends javax.swing.JFrame {
 
  
 
-    // --- 1. SETTER (Untuk Menampilkan Data) ---
+    //  SETTER Menampilkan Data
     public void setNama(String nama) { TextField_NamaLengkap.setText(nama); }
     public void setNim(String nim) { TextField_NIM.setText(nim); }
     public void setProdi(String prodi) { TextField_Prodi.setText(prodi); }
@@ -421,7 +421,7 @@ public class Profile_Mahasiswa extends javax.swing.JFrame {
     public void setRekening(String rek) { TextField_NomorRekening.setText(rek); }
     public void setAtasNama(String an) { TextField_AtasNama.setText(an); }
 
-    // --- 2. GETTER (Untuk Mengambil Inputan User) ---
+    // GETTER Mengambil Inputan User
     public String getInputEmail() { return TextField_Email.getText(); }
     public String getInputNoHp() { return TextField_NomorHP.getText(); }
     public String getInputAlamat() { return TextField_Alamat.getText(); }
@@ -438,7 +438,7 @@ public class Profile_Mahasiswa extends javax.swing.JFrame {
     public String getInputRekening() { return TextField_NomorRekening.getText(); }
     public String getInputAtasNama() { return TextField_AtasNama.getText(); }
 
-    // --- 3. MODE EDIT (Kunci/Buka Form) ---
+    // MODE EDIT (
     public void setEditMode(boolean mode) {
         // Field yang boleh diedit
         TextField_Email.setEnabled(mode);

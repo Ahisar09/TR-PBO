@@ -4,18 +4,12 @@ import java.util.Date;
 
 public class Presensi {
     
-    // --- ATRIBUT SESUAI DATABASE (Tabel: presensi) ---
     private int idPresensi;
     private int idKelas;
     private int idMahasiswa;
     private Date tanggal;
     private int pertemuanKe;
-    private String status; // Isinya: 'Hadir', 'Sakit', 'Izin', 'Alfa'
-    
-    // --- ATRIBUT HELPER (TAMBAHAN) ---
-    // Atribut ini tidak ada di tabel 'presensi' secara langsung, 
-    // tapi kita butuhkan untuk menampung hasil JOIN dari tabel 'mahasiswa'.
-    // Agar di tabel View nanti muncul Nama & NIM, bukan cuma angka ID.
+    private String status;
     private String namaMahasiswa;
     private String nimMahasiswa;
 
